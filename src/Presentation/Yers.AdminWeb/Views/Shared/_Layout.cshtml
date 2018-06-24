@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 优而思后台管理</title>
+    <!-- import CSS -->
+    <link href="~/Content/index.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">*@
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+            margin-right: 16px;
+            -webkit-transition: -webkit-transform 0.3s ease-out;
+            -moz-transition: -moz-transform 0.3s ease-out;
+            transition: transform 0.3s ease-out;
+        }
+
+        .open {
+            transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+        }
+
+        .el-aside {
+            position: relative;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            background-color: rgb(48, 65, 86);
+        }
+
+        .el-menu-vertical:not(.el-menu--collapse) {
+            width: 200px;
+            height: 100%;
+        }
+
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .header {
+            border-bottom: 1px solid #a9a9a9;
+            margin-left: 2px;
+            margin-right: 4px;
+            background-color: white;
+            margin-bottom: 2px;
+        }
+
+        .el-dropdown-link {
+            cursor: pointer;
+            color: #303133;
+        }
+
+        .content {
+            background-color: #f0f2f5;
+            margin-left: 2px;
+            margin-right: 4px;
+        }
+
+        #main {
+            height: 100%;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            height: 40px;
+        }
+    </style>
+    @RenderSection("css", required: false)
+</head>
+
+<body style="background-color: #d3d3d3; width: 100%;height: 100%">
+    <div id="main">
+        <el-container style="height: 100%">
+            <el-aside width="" style="padding: 0px; margin: 0px">
+                <el-menu v-bind:default-active="menuActiveId" background-color="#304156" class="el-menu-vertical" @@select="select" text-color="#BFCBD9" active-text-color="#409EFF" v-bind:collapse="isCollapse">
+                    <el-menu-item v-for="item in menus" v-if="!item.parent" v-bind:index="item.id" v-bind:href="item.href">
+                        <svg class="icon" aria-hidden="true">
+                            <use v-bind:xlink:href="'#'+item.ico"></use>
+                        </svg>
+                        <span slot="title">{{item.name}}</span>
+                    </el-menu-item>
+                    <el-submenu v-for="item in menus" v-if="item.parent" v-bind:index="item.id">
+                        <template slot="title">
+                            <svg class="icon" aria-hidden="true">
+                                <use v-bind:xlink:href="'#'+item.ico"></use>
+                            </svg>
+                            <span>{{item.name}}</span>
+                        </template>
+                        <el-menu-item v-for="menu in item.parent" v-bind:index="menu.id" v-bind:href="menu.href">
+                            <svg class="icon" aria-hidden="true">
+                                <use v-bind:xlink:href="'#'+menu.ico"></use>
+                            </svg>
+                            <span>{{menu.name}}</span>
+                        </el-menu-item>
+                    </el-submenu>
+                </el-menu>
+            </el-aside>
+            <el-container>
+                <el-header class="header" style="height: 60px">
+                    <el-row style="margin-top: 18px;">
+                        <el-col :md="1">
+                            <svg v-on:click="switchMenu" v-bind:class="{icon:true,open:isCollapse}" aria-hidden="true" style="cursor: pointer; height: 30px; width: 30px;">
+                                <use xlink:href="#el-icon-third-hengxian"></use>
+                            </svg>
+                        </el-col>
+                        <el-col :md="7">
+                            <h3 style="color: #606266">优而思后台管理系统</h3>
+                        </el-col>
+                        <el-col :md="8" :offset="5" style="text-align:right">
+                            <h3 style="color:#606266">系统时间：{{currentDate}}</h3>
+                        </el-col>
+                        <el-col :md="2" :offset="1">
+                            <el-dropdown :hide-on-click="false" style="font-size: 18px;font-style: normal">
+                                <span class="el-dropdown-link">
+                                    <span>
+                                        <svg aria-hidden="true" style="height: 20px; width: 20px">
+                                            <use xlink:href="#el-icon-third-guanliyuan"></use>
+                                        </svg>
+                                        <font color="#606266">管理员</font>
+                                    </span><i class="el-icon-arrow-down el-icon--right"></i>
+                                </span>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item>基本资料</el-dropdown-item>
+                                    <el-dropdown-item>修改密码</el-dropdown-item>
+                                    <el-dropdown-item divided>退出登录</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                        </el-col>
+                    </el-row>
+                </el-header>
+                <el-main class="content">
+                    @RenderBody()
+                </el-main>
+                <el-footer>
+                    <div class="footer">
+                        &copy; @DateTime.Now.Year - 优而思后台管理系统 v1.0.0
+                    </div>
+                </el-footer>
+            </el-container>
+        </el-container>
+    </div>
+    <!-- import Vue before Element -->
+    <script src="~/Scripts/vue.js"></script>
+    @*<script src="https://unpkg.com/vue/dist/vue.js"></script>*@
+    <!-- import JavaScript -->
+    <script src="~/Scripts/index.js"></script>
+    @*<script src="https://unpkg.com/element-ui/lib/index.js"></script>*@
+    <script src="//at.alicdn.com/t/font_712865_doo2rcrujge.js"></script>
+    <script type="text/javascript">
+        var main = new Vue({
+            el: "#main",
+            data() {
+                return {
+                    isCollapse: false,
+                    menus: [
+                        { id: '1', href: '/Home', name: '首页', ico: 'el-icon-third-viewgallery' },
+                        { id: '2', href: '/Video', name: '视频管理', ico: 'el-icon-third-video' },
+                        { id: '3', href: '/Book', name: '书籍管理', ico: 'el-icon-third-pdf' },
+                        { id: '4', href: '/User', name: '用户管理', ico: 'el-icon-third-bussinessman' },
+                        {
+                            id: '5', href: '', name: '系统管理', ico: 'el-icon-third-set', parent: [
+                                { id: '6', href: '/Admin', name: '管理员信息', ico: 'el-icon-third-guanliyuan' },
+                                { id: '7', href: '/Log', name: '日志信息', ico: 'el-icon-third-log' }
+                            ]
+                        }
+                    ],
+                    menuActiveId: null,
+                    currentDate: ''
+                }
+            },
+            methods: {
+                switchMenu() {
+                    this.isCollapse = !this.isCollapse;
+                },
+                select(index, indexPath, obj) {
+                    window.location.href = obj.$attrs.href;
+                }
+            }, created() {
+                setInterval(function () {
+                    var date = new Date();
+                    main.currentDate = date.toLocaleString();
+                }, 1000);
+
+                var location = window.location.pathname;
+                if (location.indexOf('/') > -1) {
+                    var href = '/' + location.split('/')[1];
+                    var menusTemp = this.menus;
+                    for (var i = 0; i < menusTemp.length; i++) {
+                        if (menusTemp[i].href === href) {
+                            this.menuActiveId = menusTemp[i].id;
+                            return false;
+                        }
+                        if (menusTemp[i].parent) {
+                            for (var j = 0; j < menusTemp[i].parent.length; j++) {
+                                if (menusTemp[i].parent[j].href === href) {
+                                    this.menuActiveId = menusTemp[i].parent[j].id;
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

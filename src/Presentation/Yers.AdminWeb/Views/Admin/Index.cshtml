@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "管理员信息";
+}
+@section css{
+    <style>
+        .bgwhite {
+            background-color: white;
+            padding: 12px 12px 0px 12px;
+        }
+    </style>
+}
+<div id="app">
+    <el-row class="bgwhite">
+        <el-form :inline="true" class="demo-form-inline">
+            <el-form-item label="审批人">
+                <el-input placeholder="审批人"></el-input>
+            </el-form-item>
+            <el-form-item label="审批人">
+                <el-input placeholder="审批人"></el-input>
+            </el-form-item>
+            <el-form-item label="审批人">
+                <el-input placeholder="审批人"></el-input>
+            </el-form-item>
+            <el-form-item label="审批人">
+                <el-input placeholder="审批人"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary">查询</el-button>
+            </el-form-item>
+        </el-form>
+    </el-row>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+    </script>
+}
