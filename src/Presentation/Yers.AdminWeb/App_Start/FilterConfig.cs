@@ -1,5 +1,5 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Yers.FrameworkWeb;
 
 namespace Yers.AdminWeb
 {
@@ -7,7 +7,9 @@ namespace Yers.AdminWeb
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new YersExceptionFilter());
+            filters.Add(new JsonNetActionFilter());
+            filters.Add(new YersAuthorizeFilter());
         }
     }
 }

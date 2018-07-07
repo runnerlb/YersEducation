@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using CodeCarvings.Piczard;
-using Yers.Common;
-using Yers.Service;
+﻿using CodeCarvings.Piczard;
+using System;
 
 namespace Yers.Tests
 {

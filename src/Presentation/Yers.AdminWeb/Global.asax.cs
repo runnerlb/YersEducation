@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Autofac;
-using Autofac.Integration.Mvc;
 using Yers.FrameworkWeb;
 using Yers.IService;
+using Yers.Service;
 
 namespace Yers.AdminWeb
 {
@@ -18,7 +16,7 @@ namespace Yers.AdminWeb
         protected void Application_Start()
         {
             log4net.Config.XmlConfigurator.Configure();
-            GlobalFilters.Filters.Add(new YersExceptionFilter());
+
             ModelBinders.Binders.Add(typeof(string), new TrimToDbcModelBinder());
             ModelBinders.Binders.Add(typeof(int), new TrimToDbcModelBinder());
             ModelBinders.Binders.Add(typeof(long), new TrimToDbcModelBinder());
@@ -48,6 +46,10 @@ namespace Yers.AdminWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            EntityMapping.Initialize();
+
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
     }
 }

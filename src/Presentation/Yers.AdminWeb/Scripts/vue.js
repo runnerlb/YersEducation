@@ -670,7 +670,6 @@ var formatComponentName = (noop);
 
 /*  */
 
-
 var uid = 0;
 
 /**
@@ -2547,8 +2546,6 @@ function eventsMixin (Vue) {
 
 /*  */
 
-
-
 /**
  * Runtime helper for resolving raw children VNodes into a slot object.
  */
@@ -2931,7 +2928,6 @@ function callHook (vm, hook) {
 }
 
 /*  */
-
 
 var MAX_UPDATE_COUNT = 100;
 
@@ -4086,12 +4082,8 @@ function mergeProps (to, from) {
 
 /*  */
 
-
-
-
 // Register the component hook to weex native render engine.
 // The hook will be triggered by native, not javascript.
-
 
 // Updates the state of the component to weex native render engine.
 
@@ -5352,7 +5344,6 @@ function setTextContent (node, text) {
 function setStyleScope (node, scopeId) {
   node.setAttribute(scopeId, '');
 }
-
 
 var nodeOps = Object.freeze({
 	createElement: createElement$1,
@@ -6760,8 +6751,6 @@ var index$1;
 var expressionPos;
 var expressionEndPos;
 
-
-
 function parseModel (val) {
   // Fix https://github.com/vuejs/vue/pull/7730
   // allow v-model="obj.val " (trailing whitespace)
@@ -7148,7 +7137,6 @@ function updateDOMProps (oldVnode, vnode) {
 }
 
 // check platforms/web/util/attrs.js acceptValue
-
 
 function shouldUpdateValue (elm, checkVal) {
   return (!elm.composing && (
@@ -8570,8 +8558,6 @@ var buildRegex = cached(function (delimiters) {
   return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
 });
 
-
-
 function parseText (
   text,
   delimiters
@@ -9060,8 +9046,6 @@ var platformIsPreTag;
 var platformMustUseProp;
 var platformGetTagNamespace;
 
-
-
 function createASTElement (
   tag,
   attrs,
@@ -9377,8 +9361,6 @@ function processFor (el) {
     }
   }
 }
-
-
 
 function parseFor (exp) {
   var inMatch = exp.match(forAliasRE);
@@ -10121,8 +10103,6 @@ var CodegenState = function CodegenState (options) {
   this.onceId = 0;
   this.staticRenderFns = [];
 };
-
-
 
 function generate (
   ast,
@@ -10943,5 +10923,4 @@ function getOuterHTML (el) {
 Vue.compile = compileToFunctions;
 
 return Vue;
-
 })));

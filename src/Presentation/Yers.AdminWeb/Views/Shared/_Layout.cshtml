@@ -156,7 +156,7 @@
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>基本资料</el-dropdown-item>
                             <el-dropdown-item>修改密码</el-dropdown-item>
-                            <el-dropdown-item divided>退出登录</el-dropdown-item>
+                            <a href="/Home/Logout"><el-dropdown-item divided>退出登录</el-dropdown-item></a>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </el-col>
@@ -170,6 +170,7 @@
     <script src="~/Scripts/index.js"></script>
     @*<script src="https://unpkg.com/element-ui/lib/index.js"></script>*@
     <script src="//at.alicdn.com/t/font_712865_doo2rcrujge.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
         var menus = [
             { id: '1', href: '/Home', name: '首页', ico: 'el-icon-third-viewgallery' },

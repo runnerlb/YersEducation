@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 
 namespace Yers.Service.Entities
 {
@@ -9,6 +8,11 @@ namespace Yers.Service.Entities
     /// </summary>
     public class AdminUserEntity : BaseEntity
     {
+        public AdminUserEntity()
+        {
+            this.CreateDateTime = DateTime.Now;
+        }
+
         /// <summary>
         /// 登录名
         /// </summary>
@@ -23,11 +27,6 @@ namespace Yers.Service.Entities
         /// 登录密码
         /// </summary>
         public string PasswordHash { get; set; }
-
-        /// <summary>
-        /// 登录密码
-        /// </summary>
-        public string PasswordSalt { get; set; }
 
         /// <summary>
         /// 手机号

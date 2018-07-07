@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优而思后台管理-登录</title>
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <style type="text/css">
+        #app {
+            width: 400px;
+            margin: 100px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body style="background-color: #2d3a4b; width: 100%;height: 100%">
+<div id="app">
+    <h2 style="color: white;text-align: center">优而思后台管理登录</h2>
+    <br />
+    <el-form ref="form" :model="form">
+        <el-form-item>
+            <el-input v-model="form.loginName" @@keyup.enter.native="onSubmit" placeholder="登录账号"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-input type="password" v-model="form.loginPwd"style="width: 100%" @@keyup.enter.native="onSubmit" placeholder="登录密码"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" style="width: 100%" @@click="onSubmit">登录</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+</body>
+</html>
+
+<script src="~/Scripts/vue.js"></script>
+<script src="~/Scripts/index.js"></script>
+<script src="//at.alicdn.com/t/font_712865_doo2rcrujge.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    var App = new Vue({
+        el: "#app",
+        data() {
+            return {
+                form: {
+                    loginName: '',
+                    loginPwd: ''
+                }
+            }
+        },
+        methods: {
+            onSubmit() {
+                if (this.form.loginName.length <= 0) {
+                    this.$message({
+                        message: '登录账号不能为空',
+                        type: 'warning'
+                    });
+
+                    return false;
+                }
+                if (this.form.loginPwd.length <= 0) {
+                    this.$message({
+                        message: '登录密码不能为空',
+                        type: 'warning'
+                    });
+
+                    return false;
+                }
+
+                window.axios.post('/Home/Login', this.form)
+                    .then((response) => {
+                        var data = response.data;
+                        if (data.result) {
+                            this.$message({
+                                message: data.msg,
+                                type: 'success'
+                            });
+                            window.location.href = "/Home/Index";
+                        } else {
+                            this.$message.error(data.msg);
+                        }
+                        this.saveDisabled = false;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            onKeypress(e) {
+                console.log(e);
+            }
+        }
+    });
+</script>

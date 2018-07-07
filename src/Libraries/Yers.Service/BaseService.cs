@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Yers.IService;
 using Yers.Service.Entities;
 
 namespace Yers.Service

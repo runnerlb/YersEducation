@@ -40,9 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAdminUserService.cs" />
     <Compile Include="IServiceSupport.cs" />
     <Compile Include="ISettingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yers.DTO\Yers.DTO.csproj">
+      <Project>{3B2C9953-63D7-4B56-987B-635505DCF732}</Project>
+      <Name>Yers.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

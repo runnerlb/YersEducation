@@ -1,6 +1,6 @@
-﻿using System.Data.Entity;
+﻿using log4net;
+using System.Data.Entity;
 using System.Reflection;
-using log4net;
 using Yers.Service.Entities;
 
 namespace Yers.Service

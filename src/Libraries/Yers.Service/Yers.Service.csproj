@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -42,6 +45,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminUserService.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="Entities\AdminLogEntity.cs" />
     <Compile Include="Entities\AdminUserEntity.cs" />
@@ -68,6 +76,16 @@
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Entities\VideoDetailEntity.cs" />
     <Compile Include="Entities\VideoEntity.cs" />
+    <Compile Include="EntityMapping.cs" />
+    <Compile Include="Migrations\201806180354248_InitialCreate.cs" />
+    <Compile Include="Migrations\201806180354248_InitialCreate.Designer.cs">
+      <DependentUpon>201806180354248_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807050014310_DeleteAdminUserPasswordSalt.cs" />
+    <Compile Include="Migrations\201807050014310_DeleteAdminUserPasswordSalt.Designer.cs">
+      <DependentUpon>201807050014310_DeleteAdminUserPasswordSalt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfig\AdminLogConfig.cs" />
     <Compile Include="ModelConfig\AdminUserConfig.cs" />
     <Compile Include="ModelConfig\BookConfig.cs" />
@@ -89,6 +107,14 @@
     <Compile Include="YersDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Yers.Common\Yers.Common.csproj">
+      <Project>{EEE10D41-5B3C-468D-ADC1-39DC93E31789}</Project>
+      <Name>Yers.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yers.DTO\Yers.DTO.csproj">
+      <Project>{3B2C9953-63D7-4B56-987B-635505DCF732}</Project>
+      <Name>Yers.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yers.IService\Yers.IService.csproj">
       <Project>{697B00A5-3AC8-49D9-B8B8-531DA4F569D7}</Project>
       <Name>Yers.IService</Name>
@@ -97,6 +123,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806180354248_InitialCreate.resx">
+      <DependentUpon>201806180354248_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807050014310_DeleteAdminUserPasswordSalt.resx">
+      <DependentUpon>201807050014310_DeleteAdminUserPasswordSalt.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
