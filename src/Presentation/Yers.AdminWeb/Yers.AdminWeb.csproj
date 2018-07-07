@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\index.css" />
+    <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="favicon.ico" />
