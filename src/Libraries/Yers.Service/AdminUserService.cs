@@ -86,7 +86,12 @@ namespace Yers.Service
 
         public AdminUserDto GetById(long id)
         {
-            throw new System.NotImplementedException();
+            using (YersDbContext ctx = new YersDbContext())
+            {
+                BaseService<AdminUserEntity> adminBaseService = new BaseService<AdminUserEntity>(ctx);
+
+                return adminBaseService.GetById(id).EntityMap();
+            }
         }
 
         public AdminUserDto[] GetPagedData(string userName, string loginName, string phone, string email, out int total, int page = 1,

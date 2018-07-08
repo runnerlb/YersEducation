@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Yers.Common
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,7 +8,6 @@
     <title>@ViewBag.Title - 优而思后台管理</title>
     <!-- import CSS -->
     <link href="~/Content/index.css" rel="stylesheet" />
-    @*<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">*@
     <style type="text/css">
         html, body {
             height: 100%;
@@ -83,6 +83,19 @@
             margin-top: 20px;
             height: 40px;
         }
+
+        .bgwhite {
+            background-color: white;
+            padding: 12px 12px 0px 12px;
+        }
+
+        .pagination-container {
+            margin: 30px 0 30px 0;
+        }
+
+        .el-input__icon {
+            line-height: 16px;
+        }
     </style>
     @RenderSection("css", required: false)
 </head>
@@ -150,7 +163,7 @@
                                 <svg aria-hidden="true" style="height: 20px; width: 20px">
                                     <use xlink:href="#el-icon-third-guanliyuan"></use>
                                 </svg>
-                                <font color="#606266">管理员</font>
+                                <font color="#606266">@Session[Keys.AdminUserName]</font>
                             </span><i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
@@ -165,12 +178,10 @@
     </div>
     <!-- import Vue before Element -->
     <script src="~/Scripts/vue.js"></script>
-    @*<script src="https://unpkg.com/vue/dist/vue.js"></script>*@
     <!-- import JavaScript -->
     <script src="~/Scripts/index.js"></script>
-    @*<script src="https://unpkg.com/element-ui/lib/index.js"></script>*@
     <script src="//at.alicdn.com/t/font_712865_doo2rcrujge.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="~/Scripts/axios.min.js"></script>
     <script type="text/javascript">
         var menus = [
             { id: '1', href: '/Home', name: '首页', ico: 'el-icon-third-viewgallery' },
@@ -184,7 +195,8 @@
                 ico: 'el-icon-third-set',
                 parent: [
                     { id: '6', href: '/Admin', name: '管理员信息', ico: 'el-icon-third-guanliyuan' },
-                    { id: '7', href: '/Log', name: '日志信息', ico: 'el-icon-third-log' }
+                    { id: '7', href: '/IdNames', name: '基础数据', ico: 'el-icon-third-category' },
+                    { id: '8', href: '/AdminLog', name: '日志信息', ico: 'el-icon-third-log' }
                 ]
             }
         ];

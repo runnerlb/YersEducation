@@ -12,6 +12,7 @@ namespace Yers.Service.ModelConfig
             HasRequired(m => m.AdminUser).WithMany().HasForeignKey(e => e.AdminUserId).WillCascadeOnDelete(false);
 
             Property(m => m.Message).HasMaxLength(500).IsRequired();
+            Property(m => m.OperIp).HasMaxLength(20).IsRequired();
         }
     }
 }

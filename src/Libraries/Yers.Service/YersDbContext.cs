@@ -11,10 +11,10 @@ namespace Yers.Service
 
         public YersDbContext() : base("name=YersConnection")
         {
-            this.Database.Log = (sql) =>
-            {
-                log.DebugFormat("EF执行SQL：{0}", sql);
-            };
+            //this.Database.Log = (sql) =>
+            //{
+            //    log.DebugFormat("EF执行SQL：{0}", sql);
+            //};
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

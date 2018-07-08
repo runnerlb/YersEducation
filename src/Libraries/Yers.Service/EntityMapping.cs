@@ -13,6 +13,10 @@ namespace Yers.Service
                 cfg.CreateMap<AdminUserDto, AdminUserEntity>();
                 cfg.CreateMap<AdminUserEntity, AdminUserDto>();
                 cfg.CreateMap<AdminUserAddDto, AdminUserEntity>();
+                cfg.CreateMap<IdNameEntity, IdNameDto>();
+                cfg.CreateMap<IdNameDto, IdNameEntity>();
+                cfg.CreateMap<AdminLogDto, AdminLogEntity>();
+                cfg.CreateMap<AdminLogEntity, AdminLogDto>().ForMember(dest => dest.AdminUserName, conf => conf.MapFrom(src => src.AdminUser.UserName));
             });
         }
 
@@ -29,6 +33,26 @@ namespace Yers.Service
         public static AdminUserEntity EntityMap(this AdminUserAddDto model)
         {
             return Mapper.Map<AdminUserEntity>(model);
+        }
+
+        public static IdNameDto EntityMap(this IdNameEntity model)
+        {
+            return Mapper.Map<IdNameDto>(model);
+        }
+
+        public static IdNameEntity EntityMap(this IdNameDto model)
+        {
+            return Mapper.Map<IdNameEntity>(model);
+        }
+
+        public static AdminLogDto EntityMap(this AdminLogEntity model)
+        {
+            return Mapper.Map<AdminLogDto>(model);
+        }
+
+        public static AdminLogEntity EntityMap(this AdminLogDto model)
+        {
+            return Mapper.Map<AdminLogEntity>(model);
         }
     }
 }

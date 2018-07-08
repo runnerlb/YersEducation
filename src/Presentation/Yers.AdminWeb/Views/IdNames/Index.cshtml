@@ -1,35 +1,27 @@
 ﻿@{
-    ViewBag.Title = "管理员信息";
+    ViewBag.Title = "基础信息";
 }
 <div id="app">
     <el-row class="bgwhite">
         <el-col :span="24">
             <el-form :inline="true">
-                <el-form-item label="用户名">
-                    <el-input placeholder="用户名" v-model="listQuery.userName"></el-input>
+                <el-form-item label="类别名称">
+                    <el-input placeholder="类别名称" v-model="listQuery.typeName"></el-input>
                 </el-form-item>
-                <el-form-item label="登录名">
-                    <el-input placeholder="登录名" v-model="listQuery.loginName"></el-input>
-                </el-form-item>
-                <el-form-item label="手机号">
-                    <el-input placeholder="手机号" v-model="listQuery.phone"></el-input>
-                </el-form-item>
-                <el-form-item label="电子邮件">
-                    <el-input placeholder="电子邮件" v-model="listQuery.email"></el-input>
+                <el-form-item label="数据名称">
+                    <el-input placeholder="数据名称" v-model="listQuery.name"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @@click="getlist()" icon="el-icon-search">查询</el-button>
-                    <el-button type="primary" @@click="showModal('adminUser')" icon="el-icon-plus">添加</el-button>
+                    <el-button type="primary" @@click="showModal('idNames')" icon="el-icon-plus">添加</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
         <el-col :span="24">
             <el-table :data="tableData" border style="width: 100%">
                 <el-table-column label="序号" type="index" width="60"></el-table-column>
-                <el-table-column prop="userName" label="用户名"></el-table-column>
-                <el-table-column prop="loginName" label="登录名"></el-table-column>
-                <el-table-column prop="phoneNumber" label="手机号"></el-table-column>
-                <el-table-column prop="email" label="电子邮件"></el-table-column>
+                <el-table-column prop="typeName" label="类别名称"></el-table-column>
+                <el-table-column prop="name" label="数据名称"></el-table-column>
                 <el-table-column prop="createDateTime" label="创建时间"></el-table-column>
                 <el-table-column label="操作" width="160">
                     <template slot-scope="scope">
@@ -45,23 +37,17 @@
             </el-pagination>
         </el-col>
         <el-dialog :title="title" :visible.sync="dialogFormVisible" width="30%">
-            <el-form ref="adminUser" status-icon :model="adminUser" label-width="100px" :rules="rules">
-                <input type="hidden" v-model="adminUser.Id" />
-                <el-form-item prop="UserName" label="用户名">
-                    <el-input v-model="adminUser.UserName"></el-input>
+            <el-form ref="idNames" status-icon :model="idNames" label-width="100px" :rules="rules">
+                <input type="hidden" v-model="idNames.Id" />
+                <el-form-item prop="TypeName" label="类型名称">
+                    <el-input v-model="idNames.TypeName"></el-input>
                 </el-form-item>
-                <el-form-item prop="LoginName" label="登录名">
-                    <el-input v-model="adminUser.LoginName"></el-input>
-                </el-form-item>
-                <el-form-item prop="PhoneNumber" label="手机号">
-                    <el-input v-model="adminUser.PhoneNumber"></el-input>
-                </el-form-item>
-                <el-form-item prop="Email" label="邮箱">
-                    <el-input v-model="adminUser.Email"></el-input>
+                <el-form-item prop="Name" label="数据名称">
+                    <el-input v-model="idNames.Name"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button :disabled="saveDisabled" @@click="create('adminUser')" type="primary">立即保存</el-button>
-                    <el-button @@click="cancel('adminUser')">取消</el-button>
+                    <el-button :disabled="saveDisabled" @@click="create('idNames')" type="primary">立即保存</el-button>
+                    <el-button @@click="cancel('idNames')">取消</el-button>
                 </el-form-item>
             </el-form>
         </el-dialog>
@@ -73,61 +59,38 @@
         var App = new Vue({
             el: "#app",
             data() {
-                var checkPhone = (rule, value, callback) => {
-                    if (!value) {
-                        return callback(new Error('手机号不能为空'));
-                    }
-                    setTimeout(() => {
-                        if (!/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(value)) {
-                            callback(new Error('请输入正确的手机号'));
-                        } else {
-                            callback();
-                        }
-                    }, 50);
-                    return false;
-                }
                 return {
                     total: 0,
                     listQuery: {
                         page: 1,
                         limit: 10,
-                        userName: '',
-                        loginName: '',
-                        phone: '',
-                        email: ''
+                        name: '',
+                        typeName: ''
                     },
-                    title: "添加管理员信息",
+                    title: "添加基础数据信息",
                     dialogFormVisible: false,
                     saveDisabled: false,
                     tableData: [],
-                    adminUser: {
-                        UserName: '',
-                        LoginName: '',
-                        PhoneNumber: '',
-                        Email: ''
+                    idNames: {
+                        TypeName: '',
+                        Name: '',
+                        Id: 0
                     },
                     rules: {
-                        LoginName: [
-                            { required: true, message: '请输入登录名', trigger: 'blur' },
-                            { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+                        TypeName: [
+                            { required: true, message: '请输入类型名称', trigger: 'blur' },
+                            { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
                         ],
-                        UserName: [
-                            { required: true, message: '请输入用户名', trigger: 'blur' },
-                            { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
-                        ],
-                        PhoneNumber: [
-                            { required: true, validator: checkPhone, trigger: 'blur' },
-                        ],
-                        Email: [
-                            { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-                            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'change' }
+                        Name: [
+                            { required: true, message: '请输入数据名称', trigger: 'blur' },
+                            { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
                         ]
                     }
                 }
             },
             methods: {
                 getlist() {
-                    window.axios.get('/Admin/GetList', { params: this.listQuery })
+                    window.axios.get('/IdNames/GetList', { params: this.listQuery })
                         .then((response) => {
                             this.tableData = response.data.data.data;
                             this.total = response.data.data.total;
@@ -138,15 +101,15 @@
                 },
                 showModal(formName) {
                     this.dialogFormVisible = true;
-                    this.adminUser = {
-                        UserName: '',
-                        LoginName: '',
-                        PhoneNumber: '',
-                        Email: '',
+                    if (this.$refs[formName]) {
+                        this.$refs[formName].resetFields();
+                    }
+                    this.idNames = {
+                        TypeName: '',
+                        Name: '',
                         Id: 0
                     };
-                    this.$refs[formName].resetFields();
-                    this.title = "添加管理员信息";
+                    this.title = "添加基础数据信息";
                 },
                 cancel(formName) {
                     this.dialogFormVisible = false;
@@ -156,7 +119,7 @@
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
                             this.saveDisabled = true;
-                            window.axios.post('/Admin/Add', this.adminUser)
+                            window.axios.post('/IdNames/Add', this.idNames)
                                 .then((response) => {
                                     var data = response.data;
                                     if (data.result) {
@@ -183,20 +146,24 @@
                 },
                 handleEdit(index, row) {
                     this.dialogFormVisible = true;
-                    var adminUser = {
-                        UserName: row.userName,
-                        LoginName: row.loginName,
-                        PhoneNumber: row.phoneNumber,
-                        Email: row.email,
+
+                    this.idNames = {
+                        TypeName: '',
+                        Name: '',
+                        Id: 0
+                    };
+                    var idNames = {
+                        TypeName: row.typeName,
+                        Name: row.name,
                         Id: row.id
                     }
-                    this.adminUser = adminUser;
-                    this.title = "修改管理员信息";
+                    this.idNames = idNames;
+                    this.title = "修改基础数据信息";
                 },
                 handleDelete(index, row) {
-                    this.$confirm('此操作将永久删除该账号, 是否继续?', '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' })
+                    this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' })
                         .then(() => {
-                            window.axios.post('/Admin/Delete', { id: row.id })
+                            window.axios.post('/IdNames/Delete', { id: row.id })
                                 .then((response) => {
                                     var data = response.data;
                                     if (data.result) {

@@ -9,6 +9,7 @@ namespace Yers.AdminWeb.Controllers
     {
         public ISettingService SettingService { get; set; }
         public IAdminUserService AdminUserService { get; set; }
+        public IAdminLogService AdminLogService { get; set; }
 
         public ActionResult Index()
         {
@@ -36,6 +37,7 @@ namespace Yers.AdminWeb.Controllers
             Session[Keys.AdminUserName] = dto.UserName;
             Session[Keys.AdminId] = dto.Id;
 
+            AdminLogService.AddNew("登录系统");
             return Json(new AjaxResult { Result = true, Msg = "登录成功" });
         }
 
@@ -45,6 +47,7 @@ namespace Yers.AdminWeb.Controllers
 
         public ActionResult Logout()
         {
+            AdminLogService.AddNew("退出登录");
             Session.Clear();
 
             return RedirectToAction("Login");

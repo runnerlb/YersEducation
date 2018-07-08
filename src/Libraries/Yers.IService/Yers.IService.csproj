@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAdminUserService.cs" />
+    <Compile Include="IIdNameService.cs" />
+    <Compile Include="IAdminLogService.cs" />
     <Compile Include="IServiceSupport.cs" />
     <Compile Include="ISettingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

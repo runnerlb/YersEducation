@@ -175,9 +175,10 @@
     <Compile Include="App_Start\YersExceptionFilter.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\IdNamesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\AdminLogController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,9 +212,8 @@
     <Content Include="Views\Video\Index.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\AdminLog\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -226,6 +226,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\IdNames\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Yers.Common\Yers.Common.csproj">

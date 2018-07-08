@@ -1,9 +1,6 @@
-﻿namespace Yers.Service.Entities
+﻿namespace Yers.DTO
 {
-    /// <summary>
-    /// 管理员日志
-    /// </summary>
-    public class AdminLogEntity : BaseEntity
+    public class AdminLogDto : BaseDto
     {
         /// <summary>
         /// 管理员Id
@@ -11,9 +8,9 @@
         public long AdminUserId { get; set; }
 
         /// <summary>
-        /// 管理员信息
+        /// 管理员姓名
         /// </summary>
-        public virtual AdminUserEntity AdminUser { get; set; }
+        public string AdminUserName { get; set; }
 
         /// <summary>
         /// 日志内容
