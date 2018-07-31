@@ -46,6 +46,10 @@
     <Compile Include="IdNameDto.cs" />
     <Compile Include="AdminLogDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VideoAddDto.cs" />
+    <Compile Include="VideoDetailAddDto.cs" />
+    <Compile Include="VideoDetailListDto.cs" />
+    <Compile Include="VideoListDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

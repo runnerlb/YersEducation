@@ -1,11 +1,8 @@
 ﻿using System;
 
-namespace Yers.Service.Entities
+namespace Yers.DTO
 {
-    /// <summary>
-    /// 视频信息
-    /// </summary>
-    public class VideoEntity : BaseEntity
+    public class VideoAddDto : BaseDto
     {
         /// <summary>
         /// 视频封面图片
@@ -53,11 +50,6 @@ namespace Yers.Service.Entities
         public DateTime OnlineTime { get; set; }
 
         /// <summary>
-        /// 上传人
-        /// </summary>
-        public virtual AdminUserEntity AdminUser { get; set; }
-
-        /// <summary>
         /// 上传人Id
         /// </summary>
         public long AdminUserId { get; set; }
@@ -68,18 +60,8 @@ namespace Yers.Service.Entities
         public long CourseTypeId { get; set; }
 
         /// <summary>
-        /// 课程类型
-        /// </summary>
-        public virtual IdNameEntity CourseType { get; set; }
-
-        /// <summary>
         /// 视频类型Id
         /// </summary>
         public long VideoTypeId { get; set; }
-
-        /// <summary>
-        /// 视频类型
-        /// </summary>
-        public virtual IdNameEntity VideoType { get; set; }
     }
 }

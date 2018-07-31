@@ -92,6 +92,18 @@
     <Compile Include="Migrations\201807080451296_AdminLog-Add-OperIp.Designer.cs">
       <DependentUpon>201807080451296_AdminLog-Add-OperIp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807080700258_Update-IdName-Remark-ImageSrc.cs" />
+    <Compile Include="Migrations\201807080700258_Update-IdName-Remark-ImageSrc.Designer.cs">
+      <DependentUpon>201807080700258_Update-IdName-Remark-ImageSrc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807101311016_VideoAddType.cs" />
+    <Compile Include="Migrations\201807101311016_VideoAddType.Designer.cs">
+      <DependentUpon>201807101311016_VideoAddType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807311248318_VideoDetailAddName.cs" />
+    <Compile Include="Migrations\201807311248318_VideoDetailAddName.Designer.cs">
+      <DependentUpon>201807311248318_VideoDetailAddName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfig\AdminLogConfig.cs" />
     <Compile Include="ModelConfig\AdminUserConfig.cs" />
@@ -111,6 +123,8 @@
     <Compile Include="ModelConfig\VideoDetailConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingService.cs" />
+    <Compile Include="VideoDetailService.cs" />
+    <Compile Include="VideoService.cs" />
     <Compile Include="YersDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +154,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807080451296_AdminLog-Add-OperIp.resx">
       <DependentUpon>201807080451296_AdminLog-Add-OperIp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807080700258_Update-IdName-Remark-ImageSrc.resx">
+      <DependentUpon>201807080700258_Update-IdName-Remark-ImageSrc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807101311016_VideoAddType.resx">
+      <DependentUpon>201807101311016_VideoAddType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807311248318_VideoDetailAddName.resx">
+      <DependentUpon>201807311248318_VideoDetailAddName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

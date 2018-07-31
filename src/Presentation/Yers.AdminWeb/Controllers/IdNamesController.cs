@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web;
+using System.Web.Mvc;
 using Yers.DTO;
 using Yers.FrameworkWeb;
 using Yers.IService;
@@ -49,6 +51,23 @@ namespace Yers.AdminWeb.Controllers
 
             AdminLogService.AddNew($"删除基础数据:{idName.Name}");
             return Json(new AjaxResult { Result = true, Msg = "删除成功" });
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(int id = 0)
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            
+            string fileName = Guid.NewGuid() + file.FileName;
+            string path = Server.MapPath("~/UploadImage/" + fileName);
+
+            file.SaveAs(path);
+            if (id > 0)
+            {
+                IdNamesService.UpdateImage(id, fileName);
+            }
+            AdminLogService.AddNew("上传图片，图片名称：" + fileName);
+            return Json(new AjaxResult{ Result = true, Msg = "上传成功", Data = fileName });
         }
     }
 }

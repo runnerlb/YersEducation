@@ -10,6 +10,8 @@ namespace Yers.Service.ModelConfig
             ToTable("T_Videos");
 
             HasRequired(m => m.AdminUser).WithMany().HasForeignKey(m => m.AdminUserId).WillCascadeOnDelete(false);
+            HasRequired(m => m.CourseType).WithMany().HasForeignKey(m => m.CourseTypeId).WillCascadeOnDelete(false);
+            HasRequired(m => m.VideoType).WithMany().HasForeignKey(m => m.VideoTypeId).WillCascadeOnDelete(false);
 
             Property(m => m.CoverPicture).IsRequired().HasMaxLength(200);
             Property(m => m.Title).IsRequired().HasMaxLength(100);

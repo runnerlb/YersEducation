@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web;
+using System.Web.Mvc;
 using Yers.Common;
 using Yers.FrameworkWeb;
 using Yers.IService;
@@ -54,5 +56,23 @@ namespace Yers.AdminWeb.Controllers
         }
 
         #endregion 退出登录
+
+        #region 上传文件
+
+        [HttpPost]
+        public ActionResult UploadImage(int id = 0)
+        {
+            HttpPostedFileBase file = Request.Files[0];
+
+            string fileName = Guid.NewGuid() + file.FileName;
+            string path = Server.MapPath("~/UploadImage/" + fileName);
+
+            file.SaveAs(path);
+
+            AdminLogService.AddNew("上传文件，文件名称：" + fileName);
+            return Json(new AjaxResult { Result = true, Msg = "上传成功", Data = fileName });
+        }
+
+        #endregion 上传文件
     }
 }

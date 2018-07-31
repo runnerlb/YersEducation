@@ -11,6 +11,7 @@ namespace Yers.Service.ModelConfig
 
             HasRequired(m => m.Video).WithMany().HasForeignKey(m => m.VideoId).WillCascadeOnDelete(false);
 
+            Property(m => m.VideoDetailName).IsRequired().HasMaxLength(50);
             Property(m => m.Summary).IsRequired().HasMaxLength(500);
             Property(m => m.VideoLink).IsRequired().HasMaxLength(200);
             Property(m => m.Content).IsRequired();

@@ -1,0 +1,366 @@
+﻿@using Newtonsoft.Json
+@model Yers.DTO.VideoAddDto
+@{
+    string title = Model.Id > 0 ? "编辑视频信息" : "添加视频信息";
+    ViewBag.Title = title;
+}
+@section css{
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .avatar-uploader .el-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .avatar-uploader .el-upload:hover {
+                border-color: #409EFF;
+            }
+
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            min-width: 160px;
+            height: 160px;
+            line-height: 160px;
+            text-align: center;
+        }
+
+        .avatar {
+            min-width: 160px;
+            height: 160px;
+            display: block;
+        }
+    </style>
+}
+<div id="app">
+    <el-row :gutter="20" class="bgwhite">
+        <h3 style="width: 100%;margin: 5px auto; color: #606266;text-align: center">@title</h3>
+        <el-col :span="22" :offset="1">
+            <el-form ref="form" :model="form" status-icon :rules="rules" label-width="80px">
+                <input type="hidden" v-model="form.Id" />
+                <el-row :gutter="50">
+                    <el-col :span="16">
+                        <el-form-item prop="Title" label="视频标题">
+                            <el-input v-model="form.Title"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item prop="OriginalPrice" label="原始价格">
+                            <el-input v-model="form.OriginalPrice"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="50">
+                    <el-col :span="8">
+                        <el-form-item prop="LecturerName" label="讲师姓名">
+                            <el-input v-model="form.LecturerName"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item prop="LecturerPosition" label="讲师职位">
+                            <el-input v-model="form.LecturerPosition"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item prop="PreferentialPrice" label="优惠价格">
+                            <el-input v-model="form.PreferentialPrice"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="50">
+                    <el-col :span="8">
+                        <el-form-item prop="CourseTypeId" label="课程类型" v-model="form.CourseTypeId">
+                            <el-select @@change="courseTypeChange" v-model="form.CourseTypeId" placeholder="请选择课程类型" style="width: 100%;">
+                                <el-option v-for="item in courseTypeList" :label="item.text" :value="item.value"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+
+                    <el-col :span="8">
+                        <el-form-item prop="VideoTypeId" label="视频类型" v-model="form.VideoTypeId">
+                            <el-select v-model="form.VideoTypeId" placeholder="请选择视频类型" style="width: 100%;">
+                                <el-option v-for="item in videoTypeList" :label="item.text" :value="item.value"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+
+                    <el-col :span="8">
+                        <el-form-item prop="OnlineTime" label="上线时间">
+                            <el-date-picker v-model="form.OnlineTime" type="datetime" placeholder="选择上线时间" default-time="12:00:00" style="width: 100%">
+                            </el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-form-item label="视频内容">
+                    <vue-html5-editor :content="form.VideoContent" @@change="videoContentChange" :height="500"></vue-html5-editor>
+                </el-form-item>
+                <el-row :gutter="50">
+                    <el-col :span="12">
+                        <el-form-item ref="CoverPicture" prop="CoverPicture" label="封面图片">
+                            <el-upload class="avatar-uploader"
+                                       action="/Home/UploadImage"
+                                       :show-file-list="false"
+                                       :data="form"
+                                       :on-success="handleAvatarCoverSuccess"
+                                       :before-upload="beforeAvatarCoverUpload">
+                                <img v-if="form.CoverPicture" :src="'/UploadImage/'+form.CoverPicture" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                    </el-col>
+
+                    <el-col :span="12">
+                        <el-form-item ref="LecturerHead" prop="LecturerHead" label="讲师头像">
+                            <el-upload class="avatar-uploader"
+                                       action="/Home/UploadImage"
+                                       :show-file-list="false"
+                                       :data="form"
+                                       :on-success="handleAvatarLecturerSuccess"
+                                       :before-upload="beforeAvatarLecturerUpload">
+                                <img v-if="form.LecturerHead" :src="'/UploadImage/'+form.LecturerHead" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-form-item>
+                    <el-button type="primary" @@click="onSubmit('form')">立即创建</el-button>
+                    <el-button @@click="cancel()">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-col>
+    </el-row>
+</div>
+@section scripts{
+    <script src="~/Scripts/vue-html5-editor.js"></script>
+    <script type="text/javascript">
+        var courseTypeList = @Html.Raw(ViewBag.CourseTypeList);
+        var videoTypeList =@Html.Raw(ViewBag.VideoTypeList);
+        var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+        @*var model = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model))');
+        var courseTypeList = JSON.parse('@Html.Raw(ViewBag.CourseTypeList)');
+        var videoTypeList = JSON.parse('@Html.Raw(ViewBag.VideoTypeList)');*@
+        Vue.use(VueHtml5Editor,
+            {
+                hiddenModules: [
+                    "image"
+                ],
+                icons: {
+                    text: "fa fa-pencil",
+                    color: "fa fa-paint-brush",
+                    font: "fa fa-font",
+                    align: "fa fa-align-justify",
+                    list: "fa fa-list",
+                    link: "fa fa-chain",
+                    unlink: "fa fa-chain-broken",
+                    tabulation: "fa fa-table",
+                    hr: "fa fa-minus"
+                },
+                visibleModules: [
+                    "text",
+                    "color",
+                    "font",
+                    "align",
+                    "list",
+                    "link",
+                    "unlink",
+                    "tabulation",
+                    "hr"
+                ],
+                language: "zh-cn",
+            });
+        var App = new Vue({
+            el: "#app",
+            data() {
+                var checkPrice = (rule, value, callback) => {
+                    if (!value) {
+                        return callback(new Error('价格不能为空'));
+                    }
+                    setTimeout(() => {
+                            if (isNaN(value)) {
+                                callback(new Error('输入格式错误'));
+                            } else {
+                                if (value < 0) {
+                                    callback(new Error('价格必须大于等于0'));
+                                } else {
+                                    callback();
+                                }
+                            }
+                            return false;
+                        },
+                        50);
+                }
+                return {
+                    form: {},
+                    courseTypeList: courseTypeList,
+                    videoTypeList: videoTypeList,
+                    rules: {
+                        Title: [
+                            { required: true, message: '请输入视频标题', trigger: 'blur' },
+                            { min: 2, max: 50, message: '长度在 2 到 50 个字符', trigger: 'blur' }
+                        ],
+                        OriginalPrice: [
+                            { required: true, validator: checkPrice, trigger: 'blur' },
+                        ],
+                        PreferentialPrice: [
+                            { required: true, validator: checkPrice, trigger: 'blur' },
+                        ],
+                        LecturerName: [
+                            { required: true, message: '请输入讲师姓名', trigger: 'blur' },
+                            { min: 2, max: 50, message: '长度在 2 到 50 个字符', trigger: 'blur' }
+                        ],
+                        LecturerPosition: [
+                            { required: true, message: '请输入讲师职位', trigger: 'blur' },
+                            { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+                        ],
+                        CourseTypeId: [
+                            { required: true, message: '请选择课程类型', trigger: 'change' },
+                        ],
+                        VideoTypeId: [
+                            { required: true, message: '请选择视频类型', trigger: 'change' }
+                        ],
+                        OnlineTime: [
+                            { required: true, message: '请选择上线时间', trigger: 'blur' }
+                        ],
+                        VideoContent: [
+                            { required: true, message: '请输入视频内容', trigger: 'blur' }
+                        ],
+                        CoverPicture: [
+                            { required: true, message: '请上传封面图片', trigger: 'blur' }
+                        ],
+                        LecturerHead: [
+                            { required: true, message: '请上传讲师头像', trigger: 'blur' }
+                        ],
+                        content:"23423542345"
+                    }
+                }
+            },
+            methods: {
+                courseTypeChange(val) {
+                    window.axios.get('/Video/GetVideoTypeList?id=' + val)
+                        .then((response) => {
+                            var data = response.data;
+                            if (data.result) {
+                                this.videoTypeList = data.data;
+                                this.form.VideoTypeId = null;
+                            } else {
+                                this.$message.error(data.msg);
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                cancel() {
+                    window.location.href = "/Video";
+                },
+                onSubmit(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            window.axios.post('/Video/Edit', this.form)
+                                .then((response) => {
+                                    var data = response.data;
+                                    if (data.result) {
+                                        this.$alert('操作成功', '提示', {
+                                            confirmButtonText: '确定',
+                                            callback: action => {
+                                                window.location.href = '/Video';
+                                            }
+                                        });
+                                    } else {
+                                        this.$message.error(data.msg);
+                                    }
+                                    this.saveDisabled = false;
+                                })
+                                .catch((error) => {
+                                    this.$message.error(error);
+                                    this.saveDisabled = false;
+                                });
+                        } else {
+                            this.$message.error('请检查表单信息是否正确');
+                            return false;
+                        }
+                    });
+                },
+                handleAvatarCoverSuccess(res, file) {
+                    if (res.result) {
+                        this.$message({
+                            message: res.msg,
+                            type: 'success'
+                        });
+                        this.$refs.CoverPicture.clearValidate();
+                        this.form.CoverPicture = res.data;
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+                },
+                beforeAvatarCoverUpload(file) {
+                    var isJpg = file.type === 'image/jpeg';
+                    var isPng = file.type === 'image/png';
+                    var isLt5M = file.size / 1024 / 1024 < 5;
+
+                    if (!isJpg && !isPng) {
+                        this.$message.error('上传头像图片只能是 JPG 和 PNG 格式!');
+                    }
+                    if (!isLt5M) {
+                        this.$message.error('上传头像图片大小不能超过 5MB!');
+                    }
+                    return isJpg && isLt5M;
+                },
+                handleAvatarLecturerSuccess(res, file) {
+                    if (res.result) {
+                        this.$message({
+                            message: res.msg,
+                            type: 'success'
+                        });
+                        this.$refs.LecturerHead.clearValidate();
+                        this.form.LecturerHead = res.data;
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+                },
+                beforeAvatarLecturerUpload(file) {
+                    var isJpg = file.type === 'image/jpeg';
+                    var isPng = file.type === 'image/png';
+                    var isLt5M = file.size / 1024 / 1024 < 5;
+
+                    if (!isJpg && !isPng) {
+                        this.$message.error('上传头像图片只能是 JPG 和 PNG 格式!');
+                    }
+                    if (!isLt5M) {
+                        this.$message.error('上传头像图片大小不能超过 5MB!');
+                    }
+                    return isJpg && isLt5M;
+                },
+                videoContentChange(data) {
+                    this.form.VideoContent = data;
+                }
+            },
+            created() {
+                if (model.Id <= 0) {
+                    this.form = {
+                        Id: 0,
+                        Title: null,
+                        OriginalPrice: null,
+                        LecturerName: null,
+                        LecturerPosition: null,
+                        PreferentialPrice: null,
+                        VideoTypeId: null,
+                        CourseTypeId: null,
+                        OnlineTime: null,
+                        VideoContent: null,
+                        CoverPicture: null,
+                        LecturerHead: null
+                    }
+                } else {
+                    this.form = model;
+                }
+            }
+        });
+    </script>
+}

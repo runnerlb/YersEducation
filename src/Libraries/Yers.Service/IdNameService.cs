@@ -70,6 +70,19 @@ namespace Yers.Service
             }
         }
 
+        public IdNameDto[] GetByTypeName(string typeName)
+        {
+            using (YersDbContext ctx = new YersDbContext())
+            {
+                BaseService<IdNameEntity> idNameBaseService = new BaseService<IdNameEntity>(ctx);
+                var idNameList = idNameBaseService.GetAll()
+                    .Where(a => a.TypeName == typeName && !a.IsDeleted)
+                    .ToList().Select(h => h.EntityMap()).ToArray();
+
+                return idNameList;
+            }
+        }
+
         public void MarkDeleted(long id)
         {
             using (YersDbContext ctx = new YersDbContext())
@@ -98,7 +111,23 @@ namespace Yers.Service
 
                 model.Name = dto.Name;
                 model.TypeName = dto.TypeName;
+                model.ImageSrc = dto.ImageSrc;
+                model.Remark = dto.Remark;
 
+                ctx.SaveChanges();
+            }
+        }
+
+        public void UpdateImage(int id, string fileName)
+        {
+            using (YersDbContext ctx = new YersDbContext())
+            {
+                BaseService<IdNameEntity> bs
+                    = new BaseService<IdNameEntity>(ctx);
+
+                var model = bs.GetById(id);
+
+                model.ImageSrc = fileName;
                 ctx.SaveChanges();
             }
         }

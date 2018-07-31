@@ -11,6 +11,8 @@ namespace Yers.Service.ModelConfig
 
             Property(p => p.Name).IsRequired().HasMaxLength(1024);
             Property(p => p.TypeName).IsRequired().HasMaxLength(1024);
+            Property(p => p.ImageSrc).HasMaxLength(1024);
+            Property(p => p.Remark).HasMaxLength(1024);
         }
     }
 }

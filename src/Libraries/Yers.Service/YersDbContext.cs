@@ -1,5 +1,6 @@
 ﻿using log4net;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Reflection;
 using Yers.Service.Entities;
 

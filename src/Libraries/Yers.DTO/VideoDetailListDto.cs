@@ -1,9 +1,9 @@
-﻿namespace Yers.Service.Entities
+﻿namespace Yers.DTO
 {
     /// <summary>
     /// 视频详情
     /// </summary>
-    public class VideoDetailEntity : BaseEntity
+    public class VideoDetailListDto
     {
         /// <summary>
         /// 视频Id
@@ -11,15 +11,9 @@
         public long VideoId { get; set; }
 
         /// <summary>
-        /// 视频信息
-        /// </summary>
-        public virtual VideoEntity Video { get; set; }
-
-        /// <summary>
         /// 视频标题
         /// </summary>
         public string VideoDetailName { get; set; }
-
         /// <summary>
         /// 视频摘要
         /// </summary>
