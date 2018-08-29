@@ -12,8 +12,12 @@ namespace Yers.Service
     {
         public long AddNew(VideoDetailAddDto dto)
         {
+            dto.CreateDateTime = DateTime.Now;
+            if (dto.Content == null)
+            {
+                dto.Content = "";
+            }
             VideoDetailEntity videoDetail = dto.EntityMap();
-            videoDetail.CreateDateTime = DateTime.Now;
             using (YersDbContext ctx = new YersDbContext())
             {
                 BaseService<VideoDetailEntity> bs

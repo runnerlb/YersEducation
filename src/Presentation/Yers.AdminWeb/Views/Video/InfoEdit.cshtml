@@ -1,0 +1,181 @@
+﻿@using Newtonsoft.Json
+@model Yers.DTO.VideoDetailAddDto
+@{
+    string title = Model.Id > 0 ? "编辑课程信息" : "添加课程信息";
+    ViewBag.Title = title;
+}
+@section css{
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .avatar-uploader .el-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-uploader .el-upload:hover {
+            border-color: #409EFF;
+        }
+
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            min-width: 160px;
+            height: 160px;
+            line-height: 160px;
+            text-align: center;
+        }
+
+        .avatar {
+            min-width: 160px;
+            height: 160px;
+            display: block;
+        }
+    </style>
+}
+<div id="app" v-loading="loading">
+    <el-row :gutter="20" class="bgwhite">
+        <h3 style="width: 100%;margin: 5px auto; color: #606266;text-align: center">@title</h3>
+        <el-col :span="22" :offset="1">
+            <el-form ref="form" :model="form" status-icon :rules="rules" label-width="80px">
+                <input type="hidden" v-model="form.Id" />
+                <el-row :gutter="50">
+                    <el-col :span="8">
+                        <el-form-item prop="VideoDetailName" label="课程标题">
+                            <el-input v-model="form.VideoDetailName"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="16">
+                        <el-form-item label="课程摘要">
+                            <el-input v-model="form.Summary"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="50">
+                    <el-col :span="24">
+                        <el-form-item prop="Content" label="课程内容">
+                            <el-input v-model="form.Content"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="50">
+                    <el-col :span="12">
+                        <el-form-item ref="VideoLink" prop="VideoLink" label="上传课程">
+                            <el-upload class="avatar-uploader"
+                                       action="/Home/UploadImage"
+                                       :show-file-list="false"
+                                       :data="form"
+                                       :on-progress="handleAvatarVideoLinkProgress"
+                                       :on-success="handleAvatarVideoLinkSuccess"
+                                       :before-upload="beforeAvatarVideoLinkUpload">
+                                <i v-if="form.VideoLink" class="el-icon-service  avatar-uploader-icon"></i>
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-form-item>
+                    <el-button type="primary" @@click="onSubmit('form')">立即创建</el-button>
+                    <el-button @@click="cancel()">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-col>
+    </el-row>
+</div>
+@section scripts{
+    <script src="~/Scripts/vue-html5-editor.js"></script>
+    <script type="text/javascript">
+      
+        var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+        var App = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    form: {},
+                    loading: false,
+                    rules: {
+                        VideoDetailName: [
+                            { required: true, message: '请输入课程标题', trigger: 'blur' },
+                            { min: 2, max: 50, message: '长度在 2 到 50 个字符', trigger: 'blur' }
+                        ]
+                    }
+                };
+            },
+            methods: {
+                cancel() {
+                    window.location.href = "/Video/Detail?videoId=@ViewBag.VideoId";
+                },
+                onSubmit(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            window.axios.post('/Video/InfoEdit', this.form)
+                                .then((response) => {
+                                    var data = response.data;
+                                    if (data.result) {
+                                        this.$alert('操作成功', '提示', {
+                                            confirmButtonText: '确定',
+                                            callback: action => {
+                                                window.location.href = '/Video/Detail?videoId=@ViewBag.VideoId';
+                                            }
+                                        });
+                                    } else {
+                                        this.$message.error(data.msg);
+                                    }
+                                    this.saveDisabled = false;
+                                })
+                                .catch((error) => {
+                                    this.$message.error(error);
+                                    this.saveDisabled = false;
+                                });
+                        } else {
+                            this.$message.error('请检查表单信息是否正确');
+                            return false;
+                        }
+                    });
+                },
+                handleAvatarVideoLinkProgress() {
+                    this.loading = true;
+                },
+                handleAvatarVideoLinkSuccess(res, file) {
+                    this.loading = false;
+                    if (res.result) {
+                        this.$message({
+                            message: res.msg,
+                            type: 'success'
+                        });
+                        this.$refs.VideoLink.clearValidate();
+                        this.form.VideoLink = res.data;
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+                },
+                beforeAvatarVideoLinkUpload(file) {
+                    var isLt5M = file.size / 1024 / 1024 < 1024;
+                    
+                    if (!isLt5M) {
+                        this.loading = false;
+                        this.$message.error('上传头像图片大小不能超过 1GB!');
+                    }
+                    return isLt5M;
+                }
+            },
+            created() {
+                if (model.Id <= 0) {
+                    this.form = {
+                        Id: 0,
+                        VideoId: @ViewBag.VideoId,
+                        VideoDetailName: null,
+                        Summary: null,
+                        VideoLink: null,
+                        Content: null
+                    }
+                } else {
+                    this.form = model;
+                }
+            }
+        });
+    </script>
+}

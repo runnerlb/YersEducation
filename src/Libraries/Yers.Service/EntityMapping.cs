@@ -24,6 +24,9 @@ namespace Yers.Service
                 cfg.CreateMap<VideoDetailEntity, VideoDetailListDto>();
                 cfg.CreateMap<VideoDetailListDto, VideoDetailEntity>();
                 cfg.CreateMap<VideoDetailEntity, VideoDetailListDto>();
+                cfg.CreateMap<VideoDetailEntity, VideoDetailAddDto>();
+                cfg.CreateMap<VideoDetailAddDto, VideoDetailEntity>();
+                //.ForMember(m => m.Video, n => n.Ignore())
                 //.ForMember(dest => dest.VideoTypeName, conf => conf.MapFrom(m=>m.VideoType.Name))
                 //.ForMember(dest => dest.CourseTypeName, conf => conf.MapFrom(m=>m.CourseType.Name));
             });

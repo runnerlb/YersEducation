@@ -3,7 +3,7 @@
     /// <summary>
     /// 视频详情
     /// </summary>
-    public class VideoDetailListDto
+    public class VideoDetailListDto:BaseDto
     {
         /// <summary>
         /// 视频Id
@@ -11,21 +11,21 @@
         public long VideoId { get; set; }
 
         /// <summary>
-        /// 视频标题
+        /// 课程标题
         /// </summary>
         public string VideoDetailName { get; set; }
         /// <summary>
-        /// 视频摘要
+        /// 课程摘要
         /// </summary>
         public string Summary { get; set; }
 
         /// <summary>
-        /// 视频地址
+        /// 课程地址
         /// </summary>
         public string VideoLink { get; set; }
 
         /// <summary>
-        /// 视频内容
+        /// 课程内容
         /// </summary>
         public string Content { get; set; }
     }

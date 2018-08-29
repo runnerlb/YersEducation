@@ -105,15 +105,8 @@
                             this.$message({ type: 'info', message: '已取消删除' });
                         });
                 },
-                handleCommand(command) {
-                    switch (command) {
-                        case 'edit':
-                            break;
-                        case 'delete':
-                            break;
-                        case 'detail':
-                            break;
-                    }
+                handleDetail(index, row) {
+                    window.location.href = '/Video/Detail?videoId=' + row.id;
                 },
                 handleSizeChange(val) {
                     this.listQuery.limit = val;

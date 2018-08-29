@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Newtonsoft.Json;
 using Yers.Common;
 using Yers.DTO;
 using Yers.FrameworkWeb;
 using Yers.IService;
-using Yers.Service;
-using Yers.Service.Entities;
 
 namespace Yers.AdminWeb.Controllers
 {
@@ -15,13 +13,14 @@ namespace Yers.AdminWeb.Controllers
     {
         public IIdNameService IdNameService { get; set; }
         public IVideoService VideoService { get; set; }
+        public IVideoDetailService VideoDetailService { get; set; }
         public IAdminLogService AdminLogService { get; set; }
 
         // GET: Video
         public ActionResult Index()
         {
             return View();
-        }
+        } 
 
         [HttpGet]
         public ActionResult GetList(string title, int page = 1, int limit = 10)
@@ -74,7 +73,7 @@ namespace Yers.AdminWeb.Controllers
             VideoService.Update(dto);
 
             AdminLogService.AddNew($"修改视频信息:{dto.Title}");
-            return Json(new AjaxResult { Result = true, Msg = "视频添加修改成功" });
+            return Json(new AjaxResult { Result = true, Msg = "视频修改成功" });
         }
 
         [HttpGet]
@@ -87,10 +86,43 @@ namespace Yers.AdminWeb.Controllers
             return Json(new AjaxResult { Result = true, Data = videoTypeList }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult VideoDetail(long videoId)
+        public ActionResult Detail(long videoId)
         {
+            var model = VideoService.GetById(videoId);
+            ViewBag.VideoTitle = model.Title;
+            var list = VideoDetailService.GetVideoDetailList(videoId).ToList();
 
-            return View();
+            ViewBag.VideoId = videoId;
+            return View(list);
+        }
+
+        [HttpGet]
+        public ActionResult InfoEdit(long videoId, long videoDetailId = 0)
+        {
+            ViewBag.VideoId = videoId;
+            VideoDetailAddDto dto = new VideoDetailAddDto();
+            if (videoDetailId > 0)
+            {
+                dto = VideoDetailService.GetById(videoDetailId);
+            }
+
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult InfoEdit(VideoDetailAddDto dto)
+        {
+            if (dto.Id <= 0)
+            {
+                VideoDetailService.AddNew(dto);
+
+                AdminLogService.AddNew($"添加课程信息:{dto.VideoDetailName}");
+                return Json(new AjaxResult { Result = true, Msg = "课程添加成功" });
+            }
+            VideoDetailService.Update(dto);
+
+            AdminLogService.AddNew($"修改课程信息:{dto.VideoDetailName}");
+            return Json(new AjaxResult { Result = true, Msg = "课程修改成功" });
         }
     }
 }

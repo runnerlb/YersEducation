@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "课程详情";
+}
+@using Newtonsoft.Json
+@model List<Yers.DTO.VideoDetailListDto>
+@section css{
+    <link href="~/Content/Videos/css/video-js.min.css" rel="stylesheet" />
+}
+<div id="app">
+    <h1>
+        视频标题:【@ViewBag.VideoTitle】
+        <el-button size="small" type="primary" @@click="add()" icon="el-icon-plus">添加课程</el-button>
+
+        <el-button size="small" type="primary" @@click="cancel()" icon="el-icon-back">返回列表</el-button>
+    </h1>
+    <br />
+
+    <el-row class="bgwhite">
+        <el-col :span="24">
+            <el-table :data="tableData" border style="width: 100%">
+                <el-table-column label="序号" type="index" width="60"></el-table-column>
+                <el-table-column prop="VideoDetailName" label="课程标题"></el-table-column>
+                <el-table-column prop="Summary" label="课程摘要"></el-table-column>
+                @*<el-table-column prop="VideoLink" label="课程地址"></el-table-column>*@
+                <el-table-column prop="Content" label="课程内容"></el-table-column>
+                <el-table-column label="操作" width="240">
+                    <template slot-scope="scope">
+                        <el-button size="mini" type="primary" @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                        <el-button size="mini" type="danger" @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        <el-button size="mini" type="success" @@click="handleLook(scope.$index, scope.row)">观看</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-col>
+    </el-row>
+    <el-dialog title="播放课程视频" :visible.sync="dialogFormVisible" :append-to-body="true" width="740px" height="600px" :close-on-click-modal="false" :before-close="handleClose">
+        <video id="myvideo" class="video-js vjs-default-skin vjs-big-play-centered" preload="auto" controls width="700" height="500"
+               poster="/UploadImage/14febc05-39c5-4d3d-a975-fccd08b6bea4net.jpg" data-setup="{}">
+            <source src="" type="video/mp4">
+            <p class="vjs-no-js">
+                请开启Javascript脚本以便
+                <a href="http://videojs.com/html5-video-support/" target="_blank">
+                    支持HTML5 video播放器
+                </a>
+            </p>
+        </video>
+    </el-dialog>
+</div>
+
+@section scripts{
+    <script src="~/Content/Videos/js/video.min.js"></script>
+    <script src="http://vjs.zencdn.net/5.19/lang/zh-CN.js"></script>
+    <script type="text/javascript">
+       var videoDetailList = @Html.Raw(JsonConvert.SerializeObject(Model));
+        var App = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    tableData: videoDetailList,
+                    dialogFormVisible: true,
+                    myPlayer: '',
+                    nowVideoName: ''
+                }
+            },
+            methods: {
+                add() {
+                    window.location.href = '/Video/InfoEdit?videoId=@ViewBag.VideoId';
+                },
+                cancel() {
+                    window.location.href = '/Video';
+                },
+                handleEdit(index, row) {
+                    window.location.href = '/Video/InfoEdit?videoId=@ViewBag.VideoId&videoDetailId=' + row.Id;
+                },
+                handleLook(index, row) {
+                    this.nowVideoName = "/UploadImage/" + row.VideoLink;
+                    this.dialogFormVisible = true;
+                    var myPlayer = videojs('myvideo');
+                    myPlayer.src(this.nowVideoName);
+                    myPlayer.load(this.nowVideoName);
+                    //myPlayer.play();
+                },
+                handleClose() {
+                    this.dialogFormVisible = false;
+                    var myPlayer = videojs('myvideo');
+                    myPlayer.pause();
+                },
+                handleDelete(index, row) {
+                    this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' })
+                        .then(() => {
+                            window.axios.post('/Video/Delete', { id: row.id })
+                                .then((response) => {
+                                    var data = response.data;
+                                    if (data.result) {
+                                        this.$message({ message: data.msg, type: 'success' });
+                                        this.getlist();
+                                    } else {
+                                        this.$message.error(data.msg);
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+
+                        })
+                        .catch(() => {
+                            this.$message({ type: 'info', message: '已取消删除' });
+                        });
+                },
+                handleDetail(index, row) {
+                    window.location.href = '/Video/VideoDetail?videoId=' + row.id;
+                }
+            },
+            mounted() {
+                this.dialogFormVisible = false;
+            }
+        });
+    </script>
+}

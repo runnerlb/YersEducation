@@ -187,6 +187,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\index.css" />
+    <Content Include="Content\Videos\css\video-js.min.css" />
+    <Content Include="Content\Videos\js\video.min.js" />
+    <Content Include="Content\Videos\js\videojs-ie8.min.js" />
+    <Content Include="Content\Videos\js\zh-CN.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\vue-html5-editor.js" />
@@ -198,6 +202,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\fonts\element-icons.woff" />
+    <Content Include="UploadImage\Autofac和MVC的结合.mp4" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -219,18 +224,19 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="UploadImage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Videos\js\zh-CN.json" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\IdNames\Index.cshtml" />
     <Content Include="Views\Video\Edit.cshtml" />
-    <Content Include="Views\Video\VideoDetail.cshtml" />
+    <Content Include="Views\Video\Detail.cshtml" />
+    <Content Include="Views\Video\InfoEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Yers.Common\Yers.Common.csproj">
