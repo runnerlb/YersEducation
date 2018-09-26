@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>优尔思校长在线</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/video-js.css">
+    <style >
+        body, html {
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+
+<body ontouchstart>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div class="weui-tab__bd-item weui-tab__bd-item--active">
+                <h1>此功能暂未开放</h1>
+            </div>
+        </div>
+
+        <div class="weui-tabbar">
+            <a href="@Url.Action("Index")" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/img/icos/icon_nav_shouye_off.png" />
+                </div>
+                <p class="weui-tabbar__label">首页</p>
+            </a>
+            <a href="@Url.Action("Shop")" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/img/icos/icon_nav_shop_off.png" />
+                </div>
+                <p class="weui-tabbar__label">商城</p>
+            </a>
+            <a href="#" class="weui-tabbar__item weui-bar__item--on">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/img/icos/icon_nav_my_on.png" />
+                </div>
+                <p class="weui-tabbar__label">我的</p>
+            </a>
+        </div>
+    </div>
+
+    <script src="~/Content/lib/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/fastclick.js"></script>
+    <script>
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="~/Scripts/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/swiper.min.js"></script>
+    <script src="~/Content/lib/video.min.js"></script>
+    @*<script src="http://vjs.zencdn.net/5.19/lang/zh-CN.js"></script>*@
+
+</body>
+
+</html>

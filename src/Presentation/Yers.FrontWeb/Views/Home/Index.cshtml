@@ -1,31 +1,226 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using Yers.DTO
+@{
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>优尔思校长在线</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_851803_3kgaykkgf3s.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/video-js.css">
+    <style>
+        body, html {
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #e0d7d7;
+        }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        .swiper-slide a {
+            color: black
+        }
+
+        .swiper-jingxuan {
+            padding: 12px 0px 6px 0px;
+            background-color: white;
+        }
+
+            .swiper-jingxuan .swiper-slide {
+                text-align: center
+            }
+
+        .jingxuan-pagination {
+            background-color: white
+        }
+        .active {
+            color: #ff6a00;
+            border-bottom: 3px solid #ff6a00;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body ontouchstart>
+    <div class="weui-tab" id="app">
+        <div class="weui-tab__bd">
+            <div class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="wy-Module">
+                    <div class="wy-Module-con">
+                        <div class="swiper-container swiper-jingxuan">
+                            <div class="swiper-wrapper">
+                                @{
+                                    var courseType = ViewBag.ShouYeCourseType as IdNameDto[];
+                                }
+                                @foreach (var item in courseType)
+                                {
+                                    <div class="swiper-slide">
+                                        <span data-id="@item.Id">
+                                            @item.Name
+                                        </span>
+                                    </div>
+                                }
+                            </div>
+                            <div class="swiper-pagination jingxuan-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-content">
+                    <!-- 顶部轮播图 -->
+                    <div class="swiper-container swiper-banner">
+                        <div class="swiper-wrapper">
+                            @{
+                                var shouYeLunBo = ViewBag.ShouYeLunBo as IdNameDto[];
+                            }
+                            @foreach (var item in shouYeLunBo)
+                            {
+                                <div class="swiper-slide">
+                                    <a href="@item.Remark">
+                                        <img src="http://192.168.2.112:81/UploadImage/@item.ImageSrc" />
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <!-- 顶部轮播图 -->
+                    <div class="page__bd">
+                        <div class="weui-panel weui-panel_access">
+                            <div class="weui-panel__hd">全部课程</div>
+                            <div class="weui-panel__bd">
+                                <a :href="'/Home/Detail?id='+item.id" v-for="item in tableData" class="weui-media-box weui-media-box_appmsg">
+                                    <div class="weui-media-box__hd">
+                                        <img class="weui-media-box__thumb" :src="'http://192.168.2.112:81/UploadImage/'+item.lecturerHead" alt="">
+                                    </div>
+                                    <div class="weui-media-box__bd">
+                                        <h4 class="weui-media-box__title">{{item.title}}</h4>
+                                        <p class="weui-media-box__desc" v-html="item.summary"></p>
+                                        <div class="weui-flex weui-media-box__desc" style="margin-top:5px;">
+                                            <div class="weui-flex__item">
+                                                <i class="iconfont icon-guankanyanjing"></i>2891
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <i class="iconfont icon-shipin"></i> 共20集
+                                            </div>
+                                            <div style="margin-top:3px;color:red;font-size:14px;">
+                                                ￥{{item.preferentialPrice}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="weui-panel__ft">
+                                <a href="javascript:void(0);" @@click="loadMore()" class="weui-cell weui-cell_access weui-cell_link">
+                                    <div class="weui-cell__bd">查看更多</div>
+                                    <span class="weui-cell__ft"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="weui-tabbar">
+            <a href="#" class="weui-tabbar__item weui-bar__item--on">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/img/icos/icon_nav_shouye_on.png" />
+                </div>
+                <p class="weui-tabbar__label">首页</p>
+            </a>
+            <a href="@Url.Action("Shop")" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/img/icos/icon_nav_shop_off.png" />
+                </div>
+                <p class="weui-tabbar__label">商城</p>
+            </a>
+            <a href="@Url.Action("My")" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="~/Content/img/icos/icon_nav_my_off.png" />
+                </div>
+                <p class="weui-tabbar__label">我的</p>
+            </a>
+        </div>
+
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+    <script src="~/Content/lib/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/fastclick.js"></script>
+    <script src="~/Scripts/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/swiper.min.js"></script>
+    <script src="~/Content/lib/video.min.js"></script>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/axios.min.js"></script>
+    @*<script src="http://vjs.zencdn.net/5.19/lang/zh-CN.js"></script>*@
+    <script>
+
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    total: 0,
+                    listQuery: {
+                        page: 1,
+                        limit: 10,
+                        typeId: 0
+                    },
+                    tableData: []
+                }
+            },
+            methods: {
+                getlist() {
+                    window.axios.get('/Home/GetList', { params: this.listQuery })
+                        .then((response) => {
+                            this.tableData = response.data.data;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                loadMore() {
+                    this.limit = this.limit + 10;
+                    this.getlist();
+                }
+            },
+            mounted() {
+                this.getlist();
+            }
+        });
+
+        $(function () {
+            //FastClick.attach(document.body);
+
+            $(".swiper-banner").swiper({
+                loop: true,
+                autoplay: 3000
+            });
+
+            $(".swiper-news").swiper({
+                loop: true,
+                direction: 'vertical',
+                paginationHide: true,
+                autoplay: 30000
+            });
+            $(".swiper-jingxuan").swiper({
+                paginationType: 'progress',
+                slidesPerView: 4
+            });
+
+            $(".swiper-jingxuan span").bind('click', function () {
+                $(".swiper-jingxuan span").removeClass("active");
+                $(this).addClass("active");
+                var id = $(this).attr("data-id");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

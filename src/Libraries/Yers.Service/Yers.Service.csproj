@@ -104,6 +104,10 @@
     <Compile Include="Migrations\201807311248318_VideoDetailAddName.Designer.cs">
       <DependentUpon>201807311248318_VideoDetailAddName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809261250037_Video-Add-Summary.cs" />
+    <Compile Include="Migrations\201809261250037_Video-Add-Summary.Designer.cs">
+      <DependentUpon>201809261250037_Video-Add-Summary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfig\AdminLogConfig.cs" />
     <Compile Include="ModelConfig\AdminUserConfig.cs" />
@@ -163,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807311248318_VideoDetailAddName.resx">
       <DependentUpon>201807311248318_VideoDetailAddName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809261250037_Video-Add-Summary.resx">
+      <DependentUpon>201809261250037_Video-Add-Summary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

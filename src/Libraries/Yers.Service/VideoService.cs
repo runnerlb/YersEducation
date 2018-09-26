@@ -42,6 +42,18 @@ namespace Yers.Service
             }
         }
 
+        public VideoListDto[] GetAll()
+        {
+            using (YersDbContext ctx = new YersDbContext())
+            {
+                BaseService<VideoEntity> videoBaseService = new BaseService<VideoEntity>(ctx);
+                var videoDto = videoBaseService.GetAll()
+                    .Where(a=>!a.IsDeleted).ToList();
+
+                return videoDto.Select(h => h.EntityMapToList()).ToArray();
+            }
+        }
+
         public VideoListDto[] GetPagedData(string title, out int total, int page, int limit)
         {
             using (YersDbContext ctx = new YersDbContext())

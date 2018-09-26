@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Yers.DTO
 {
@@ -18,6 +19,11 @@ namespace Yers.DTO
         /// 讲师姓名
         /// </summary>
         public string LecturerName { get; set; }
+
+        /// <summary>
+        /// 视频摘要
+        /// </summary>
+        public string Summary { get; set; }
 
         /// <summary>
         /// 讲师头像
@@ -63,5 +69,7 @@ namespace Yers.DTO
         /// 视频类型Id
         /// </summary>
         public long VideoTypeId { get; set; }
+
+        public List<VideoDetailListDto> VideoDetailListDtos { get; set; } = new List<VideoDetailListDto>();
     }
 }

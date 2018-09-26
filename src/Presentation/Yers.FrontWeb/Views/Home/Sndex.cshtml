@@ -1,0 +1,155 @@
+﻿@using Yers.DTO
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>优尔思校长在线</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/video-js.css">
+</head>
+
+<body>
+    <!-- 搜索栏 -->
+    <header>
+        <div class="weui-search-bar" id="searchBar">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索您想要的商品" required>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索您想要的课程</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+        </div>
+    </header>
+
+    <!-- 搜索栏 -->
+    <div class="weui-content">
+        <!-- 顶部轮播图 -->
+        <div class="swiper-container swiper-banner">
+            <div class="swiper-wrapper">
+                @{
+                    var shouYeLunBo = ViewBag.ShouYeLunBo as IdNameDto[];
+                }
+                @foreach (var item in shouYeLunBo)
+                {
+                    <div class="swiper-slide">
+                        <a href="@item.Remark">
+                            <img src="http://localhost:81/UploadImage/@item.ImageSrc" />
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <!-- 顶部轮播图 -->
+        <!--课程分类-->
+        <div class="weui-flex wy-iconlist-box">
+            @{
+                var shouYeTuiJian = ViewBag.ShouYeTuiJian as List<IdNameDto>;
+            }
+            @foreach (var item in shouYeTuiJian)
+            {
+                <div class="weui-flex__item">
+                    <a href="#" class="wy-links-iconlist">
+                        <div class="img">
+                            <img src="http://localhost:81/UploadImage/@item.ImageSrc" />
+                        </div>
+                        <p>@item.Name</p>
+                    </a>
+                </div>
+            }
+        </div>
+        <!--课程分类-->
+        <!--新闻切换-->
+        <div class="wy-ind-news">
+            <i class="news-icon-laba"></i>
+            <div class="swiper-container swiper-news">
+                <div class="swiper-wrapper">
+                    @{
+                        var shouYeGongGao = ViewBag.ShouYeGongGao as IdNameDto[];
+                    }
+                    @foreach (var item in shouYeGongGao)
+                    {
+                        <div class="swiper-slide">
+                            <a href="@item.Remark">@item.Name</a>
+                        </div>
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <a href="news_list.html" class="newsmore">
+                <i class="news-icon-more"></i>
+            </a>
+        </div>
+        <!--新闻切换-->
+        <!--免费视频推荐-->
+        <div class="wy-Module">
+            <div class="wy-Module-tit">
+                <span>精品课程</span>
+            </div>
+            <div class="wy-Module-con">
+                <div class="swiper-container swiper-jingxuan" style="padding-top:34px;">
+                    <div class="swiper-wrapper">
+                        @{
+                            var shouYeVideo = ViewBag.ShouYeVideo as List<VideoListDto>;
+                        }
+                        @foreach (var item in shouYeVideo)
+                        {
+                            <div class="swiper-slide">
+                                <a href="#" style="font-size: 12px; color: black;text-align: center">
+                                    @item.Title
+                                    <img style="width: 130px" src="http://localhost:81/UploadImage/@item.CoverPicture" />
+
+                                </a>
+                            </div>
+                        }
+                    </div>
+                    <div class="swiper-pagination jingxuan-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="~/Content/lib/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/swiper.min.js"></script>
+    <script src="~/Content/lib/video.min.js"></script>
+    <script src="http://vjs.zencdn.net/5.19/lang/zh-CN.js"></script>
+    <script>
+        $(".swiper-banner").swiper({
+            loop: true,
+            autoplay: 3000
+        });
+
+        $(".swiper-news").swiper({
+            loop: true,
+            direction: 'vertical',
+            paginationHide: true,
+            autoplay: 30000
+        });
+
+        $(".swiper-jingxuan").swiper({
+            pagination: '.swiper-pagination',
+            loop: true,
+            paginationType: 'fraction',
+            slidesPerView: 3,
+            paginationClickable: true,
+            spaceBetween: 2
+        });
+    </script>
+</body>
+
+</html>

@@ -23,6 +23,11 @@ namespace Yers.Service.Entities
         public string LecturerName { get; set; }
 
         /// <summary>
+        /// 视频摘要
+        /// </summary>
+        public string Summary { get; set; }
+
+        /// <summary>
         /// 讲师头像
         /// </summary>
         public string LecturerHead { get; set; }

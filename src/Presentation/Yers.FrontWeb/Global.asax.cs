@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Yers.FrameworkWeb;
 using Yers.IService;
+using Yers.Service;
 
 namespace Yers.FrontWeb
 {
@@ -45,6 +46,11 @@ namespace Yers.FrontWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
+            EntityMapping.Initialize();
+
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
     }
 }

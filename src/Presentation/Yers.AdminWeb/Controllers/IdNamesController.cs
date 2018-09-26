@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Yers.DTO;
@@ -15,6 +16,8 @@ namespace Yers.AdminWeb.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            var list = IdNamesService.GetAll().GroupBy(m => m.TypeName).Select(m => new { text = m.Key, value = m.Key });
+            ViewBag.TypeNameList = list;
             return View();
         }
 
@@ -57,7 +60,7 @@ namespace Yers.AdminWeb.Controllers
         public ActionResult UploadImage(int id = 0)
         {
             HttpPostedFileBase file = Request.Files[0];
-            
+
             string fileName = Guid.NewGuid() + file.FileName;
             string path = Server.MapPath("~/UploadImage/" + fileName);
 
@@ -67,7 +70,7 @@ namespace Yers.AdminWeb.Controllers
                 IdNamesService.UpdateImage(id, fileName);
             }
             AdminLogService.AddNew("上传图片，图片名称：" + fileName);
-            return Json(new AjaxResult{ Result = true, Msg = "上传成功", Data = fileName });
+            return Json(new AjaxResult { Result = true, Msg = "上传成功", Data = fileName });
         }
     }
 }
