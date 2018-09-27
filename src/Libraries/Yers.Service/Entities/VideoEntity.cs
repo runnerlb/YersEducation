@@ -83,6 +83,11 @@ namespace Yers.Service.Entities
         public long VideoTypeId { get; set; }
 
         /// <summary>
+        /// 视频数量
+        /// </summary>
+        public int TotalVideos { get; set; }
+
+        /// <summary>
         /// 视频类型
         /// </summary>
         public virtual IdNameEntity VideoType { get; set; }

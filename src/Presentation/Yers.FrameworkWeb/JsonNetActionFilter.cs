@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Yers.Common;
 
 namespace Yers.FrameworkWeb
 {
@@ -26,6 +27,7 @@ namespace Yers.FrameworkWeb
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            filterContext.Controller.ViewBag.PictureServer = CommonHelper.GetAppSettingValue("PictureServer");
         }
     }
 }

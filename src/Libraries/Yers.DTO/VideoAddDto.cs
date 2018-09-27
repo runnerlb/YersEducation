@@ -70,6 +70,11 @@ namespace Yers.DTO
         /// </summary>
         public long VideoTypeId { get; set; }
 
+        /// <summary>
+        /// 视频数量
+        /// </summary>
+        public int TotalVideos { get; set; }
+
         public List<VideoDetailListDto> VideoDetailListDtos { get; set; } = new List<VideoDetailListDto>();
     }
 }

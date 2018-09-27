@@ -55,9 +55,14 @@
                 </el-row>
 
                 <el-row :gutter="50">
-                    <el-col :span="24">
+                    <el-col :span="16">
                         <el-form-item prop="Content" label="视频摘要">
                             <el-input v-model="form.Summary"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-form-item label="视频集数">
+                            <el-input v-model="form.TotalVideos"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -362,7 +367,8 @@
                         VideoContent: null,
                         CoverPicture: null,
                         LecturerHead: null,
-                        Summary: null
+                        Summary: null,
+                        TotalVideos: null
                     }
                 } else {
                     this.form = model;

@@ -59,5 +59,11 @@ namespace Yers.DTO
         /// 视频类型
         /// </summary>
         public string VideoTypeName { get; set; }
+
+        /// <summary>
+        /// 视频数量
+        /// </summary>
+        public int TotalVideos { get; set; }
+
     }
 }
