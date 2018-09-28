@@ -237,6 +237,7 @@
     <Content Include="Views\Video\Edit.cshtml" />
     <Content Include="Views\Video\Detail.cshtml" />
     <Content Include="Views\Video\InfoEdit.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Yers.Common\Yers.Common.csproj">

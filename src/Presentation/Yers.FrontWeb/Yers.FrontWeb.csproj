@@ -337,6 +337,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\My.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Views\Home\Shop.cshtml" />
   </ItemGroup>
   <ItemGroup>
