@@ -11,7 +11,6 @@ namespace Yers.AdminWeb.Controllers
     {
         public IAdminUserService AdminUserService { get; set; }
         public IAdminLogService AdminLogService { get; set; }
-
         // GET: Admin
         public ActionResult Index()
         {

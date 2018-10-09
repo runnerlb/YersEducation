@@ -50,6 +50,7 @@
     <Compile Include="VideoDetailAddDto.cs" />
     <Compile Include="VideoDetailListDto.cs" />
     <Compile Include="VideoListDto.cs" />
+    <Compile Include="WeChatRequestDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

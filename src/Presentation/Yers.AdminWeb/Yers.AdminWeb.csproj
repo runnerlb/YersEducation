@@ -186,6 +186,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\Videos\css\video-js.min.css" />
     <Content Include="Content\Videos\js\video.min.js" />
@@ -193,6 +194,25 @@
     <Content Include="Content\Videos\js\zh-CN.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\index.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\Uploader.swf" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.css" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.custom.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.custom.min.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.fis.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.flashonly.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.flashonly.min.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.html5only.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.html5only.min.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.min.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.noimage.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.noimage.min.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.nolog.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.nolog.min.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.withoutimage.js" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\webuploader.withoutimage.min.js" />
     <Content Include="Scripts\vue-html5-editor.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="favicon.ico" />
@@ -238,6 +258,7 @@
     <Content Include="Views\Video\Detail.cshtml" />
     <Content Include="Views\Video\InfoEdit.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\Plugins\webuploader-0.1.5\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Yers.Common\Yers.Common.csproj">

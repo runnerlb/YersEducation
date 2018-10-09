@@ -1,11 +1,14 @@
 ﻿@using Newtonsoft.Json
 @model Yers.DTO.VideoDetailAddDto
 @{
+    /**/
+
     string title = Model.Id > 0 ? "编辑课程信息" : "添加课程信息";
     ViewBag.Title = title;
 }
 @section css{
-    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Plugins/webuploader-0.1.5/webuploader.css" rel="stylesheet" />
     <style>
         .avatar-uploader .el-upload {
             border: 1px dashed #d9d9d9;
@@ -15,9 +18,9 @@
             overflow: hidden;
         }
 
-        .avatar-uploader .el-upload:hover {
-            border-color: #409EFF;
-        }
+            .avatar-uploader .el-upload:hover {
+                border-color: #409EFF;
+            }
 
         .avatar-uploader-icon {
             font-size: 28px;
@@ -61,20 +64,22 @@
                     </el-col>
                 </el-row>
                 <el-row :gutter="50">
-                    <el-col :span="12">
-                        <el-form-item ref="VideoLink" prop="VideoLink" label="上传课程">
-                            <el-upload class="avatar-uploader"
-                                       action="/Home/UploadImage"
-                                       :show-file-list="false"
-                                       :data="form"
-                                       :on-progress="handleAvatarVideoLinkProgress"
-                                       :on-success="handleAvatarVideoLinkSuccess"
-                                       :before-upload="beforeAvatarVideoLinkUpload">
-                                <i v-if="form.VideoLink" class="el-icon-service  avatar-uploader-icon"></i>
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
-                        </el-form-item>
-                    </el-col>
+                    <input type="hidden" :value="form.VideoLink" />
+                    <div id="uploader" class="wu-example">
+                        <!--用来存放文件信息-->
+                        <div class="filename"></div>
+                        <div class="state"></div>
+                        <div class="progress">
+                            <el-progress :text-inside="true" :stroke-width="18" :percentage="percentage"></el-progress>
+                        </div>
+                        <div class="btns" style="width:400px;margin:10px auto;">
+                            <div id="picker" style="float:left;margin-right:20px">选择文件</div>
+                            <el-button type="success" id="ctlBtn">开始上传</el-button>
+                            <el-button type="danger" id="pause">暂停上传</el-button>
+                            @*<button id="ctlBtn" type="button" class="btn btn-default">开始上传</button>
+                                <button id="pause" type="button" class="btn btn-danger">暂停上传</button>*@
+                        </div>
+                    </div>
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @@click="onSubmit('form')">立即创建</el-button>
@@ -86,8 +91,10 @@
 </div>
 @section scripts{
     <script src="~/Scripts/vue-html5-editor.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Plugins/webuploader-0.1.5/webuploader.min.js"></script>
     <script type="text/javascript">
-      
+
         var model = @Html.Raw(JsonConvert.SerializeObject(Model));
 
         var App = new Vue({
@@ -101,7 +108,8 @@
                             { required: true, message: '请输入课程标题', trigger: 'blur' },
                             { min: 2, max: 50, message: '长度在 2 到 50 个字符', trigger: 'blur' }
                         ]
-                    }
+                    },
+                    percentage:0.0
                 };
             },
             methods: {
@@ -154,7 +162,7 @@
                 },
                 beforeAvatarVideoLinkUpload(file) {
                     var isLt5M = file.size / 1024 / 1024 < 1024;
-                    
+
                     if (!isLt5M) {
                         this.loading = false;
                         this.$message.error('上传头像图片大小不能超过 1GB!');
@@ -177,5 +185,60 @@
                 }
             }
         });
+
+     $(function () {
+        var GUID = WebUploader.Base.guid();//一个GUID
+        var uploader = WebUploader.create({
+            swf: '/Scripts/Plugins/webuploader-0.1.5/Uploader.swf',
+            server: '@Url.Action("Upload")',
+            pick: '#picker',
+            resize: false,
+            chunked: true,//开始分片上传
+            chunkSize: 512000,//每一片的大小
+            formData: {
+                guid: GUID //自定义参数，待会儿解释
+            }
+        });
+        uploader.on('fileQueued', function (file) {
+            $("#uploader .filename").html("文件名：" + file.name);
+            $("#uploader .state").html('等待上传');
+            App.percentage = 0;
+            $('#ctlBtn').removeAttr('disabled');
+        });
+         uploader.on('uploadProgress', function (file, percentage) {
+             App.percentage = parseFloat((percentage * 100).toFixed(1));
+        });
+        uploader.on('uploadSuccess', function (file) {
+            $.post('@Url.Action("Merge")', { guid: GUID, fileName: file.name }, function (data) {
+                if (data.result) {
+                    App.$message({
+                        message: data.msg,
+                        type: 'success'
+                    });
+                    App.form.VideoLink = data.data;
+                    $("#uploader .state").html("上传成功...");
+                } else {
+                    $("#uploader .state").html("上传失败...");
+                }
+            });
+        });
+        uploader.on('uploadError', function () {
+            $("#uploader .state").html("上传失败...");
+        });
+
+         $("#ctlBtn").click(function () {
+            uploader.upload();
+            $("#ctlBtn").text("上传");
+            $('#ctlBtn').attr('disabled', 'disabled');
+            $("#uploader .progress-bar").addClass('progress-bar-striped').addClass('active');
+            $("#uploader .state").html("上传中...");
+        });
+        $('#pause').click(function () {
+            uploader.stop(true);
+            $('#ctlBtn').removeAttr('disabled');
+            $("#ctlBtn").text("继续上传");
+            $("#uploader .state").html("暂停中...");
+        });
+    });
     </script>
 }
