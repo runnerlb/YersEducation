@@ -308,11 +308,6 @@
     <Content Include="upload\xq7.jpg" />
     <Content Include="upload\xq8.jpg" />
     <Content Include="upload\xq9.jpg" />
-    <Content Include="upload\zhutu01.jpg" />
-    <Content Include="upload\zhutu02.jpg" />
-    <Content Include="upload\zhutu03.jpg" />
-    <Content Include="upload\zhutu04.jpg" />
-    <Content Include="upload\zhutu05.jpg" />
     <Content Include="upload\shipin.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
