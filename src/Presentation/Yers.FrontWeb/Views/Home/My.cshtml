@@ -11,21 +11,109 @@
     <title>优尔思校长在线</title>
     <link rel="stylesheet" type="text/css" href="~/Content/lib/weui.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/jquery-weui.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    @*<link rel="stylesheet" type="text/css" href="~/Content/style.css">*@
     <link rel="stylesheet" type="text/css" href="~/Content/lib/video-js.css">
-    <style >
+    <style>
         body, html {
             height: 100%;
             -webkit-tap-highlight-color: transparent;
+        }
+
+        #my-header {
+            background-color: #234;
+            height: 135px;
+            padding: 0px;
+        }
+
+        .img {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            border-radius: 50%;
+            float: left;
+        }
+
+        .nickName {
+            font-size: 17px;
+            color: #ffffff;
+        }
+
+        .desc {
+            font-size: 12px;
+            color: #ffffff;
+            margin-top: 8px;
+        }
+
+        .huiyuan {
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            margin: 10px auto;
+            background-color: #1E90FF;
+            text-align: center;
+            color: #ffffff;
+            border-radius: 25px;
+            -moz-border-radius: 25px;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body ontouchstart>
+
     <div class="weui-tab">
         <div class="weui-tab__bd">
-            <div class="weui-tab__bd-item weui-tab__bd-item--active">
-                <h1>此功能暂未开放</h1>
+            <header id='my-header' style="background-color:#234">
+                <div class="weui-flex">
+                    <div class="weui-flex__item" style="padding:20px;">
+                        <img src="/Content/img/headimg.jpg" class="img">
+                        <div class="nickName">追逐我的明天</div>
+                        <div class="desc">把知识装进口袋，让学习变得简单</div>
+                        <div class="huiyuan">+加入会员</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="bd">
+                <div class="page__bd">
+                    <div class="weui-cells" style="margin-top:10px;">
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="/Content/img/qianbao.png" alt="" style="width:20px;margin-right:10px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <p>我的钱包</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="/Content/img/qiandao.png" alt="" style="width:20px;margin-right:10px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <p>我的签到</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="/Content/img/huiyuanquanyi.png" alt="" style="width:20px;margin-right:10px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <p>会员权益</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="/Content/img/guankanjilu.png" alt="" style="width:20px;margin-right:10px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <p>观看记录</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="/Content/img/goumai.png" alt="" style="width:20px;margin-right:10px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <p>购买课程</p>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 

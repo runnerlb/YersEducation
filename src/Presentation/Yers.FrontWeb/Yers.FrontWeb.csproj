@@ -195,6 +195,10 @@
     <Content Include="Content\img\footer02.png" />
     <Content Include="Content\img\footer03.png" />
     <Content Include="Content\img\footer04.png" />
+    <Content Include="Content\img\goumai.png" />
+    <Content Include="Content\img\guankanjilu.png" />
+    <Content Include="Content\img\headimg.jpg" />
+    <Content Include="Content\img\huiyuanquanyi.png" />
     <Content Include="Content\img\icon-back.png" />
     <Content Include="Content\img\icon-collection.png" />
     <Content Include="Content\img\icon-dele.png" />
@@ -222,6 +226,8 @@
     <Content Include="Content\img\pic_160.png" />
     <Content Include="Content\img\pic_heart01.png" />
     <Content Include="Content\img\pic_heart02.png" />
+    <Content Include="Content\img\qianbao.png" />
+    <Content Include="Content\img\qiandao.png" />
     <Content Include="Content\img\ruzhuliucheng.jpg" />
     <Content Include="Content\img\tophovertree.gif" />
     <Content Include="Content\img\vcode.jpg" />

@@ -41,7 +41,7 @@ namespace Yers.FrontWeb.Controllers
             return View();
         }
 
-        public ActionResult Index(int code,int type = 1)
+        public ActionResult Index(int type = 1)
         {
             logger.Info(HttpContext.Request.Form.Count);
 
