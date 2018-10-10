@@ -284,31 +284,6 @@
     <Content Include="Scripts\swiper.js" />
     <Content Include="Scripts\swiper.min.js" />
     <Content Include="Scripts\vue.js" />
-    <Content Include="upload\ban1.jpg" />
-    <Content Include="upload\ban2.jpg" />
-    <Content Include="upload\ban3.jpg" />
-    <Content Include="upload\ban4.jpg" />
-    <Content Include="upload\headimg.jpg" />
-    <Content Include="upload\jingxuan1.jpg" />
-    <Content Include="upload\jingxuan2.jpg" />
-    <Content Include="upload\jingxuan3.jpg" />
-    <Content Include="upload\jingxuan4.jpg" />
-    <Content Include="upload\jingxuan5.jpg" />
-    <Content Include="upload\pro1.jpg" />
-    <Content Include="upload\pro2.jpg" />
-    <Content Include="upload\pro3.jpg" />
-    <Content Include="upload\pro4.jpg" />
-    <Content Include="upload\pro5.jpg" />
-    <Content Include="upload\xq1.jpg" />
-    <Content Include="upload\xq2.jpg" />
-    <Content Include="upload\xq3.jpg" />
-    <Content Include="upload\xq4.jpg" />
-    <Content Include="upload\xq5.jpg" />
-    <Content Include="upload\xq6.jpg" />
-    <Content Include="upload\xq7.jpg" />
-    <Content Include="upload\xq8.jpg" />
-    <Content Include="upload\xq9.jpg" />
-    <Content Include="upload\shipin.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -325,6 +300,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\lib\zh-CN.json" />
