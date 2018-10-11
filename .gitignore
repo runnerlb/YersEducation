@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /src/Presentation/Yers.AdminWeb/UploadImage
 /src/Presentation/Yers.FrontWeb/upload
+/src/Presentation/Yers.AdminWeb/UploadImage
