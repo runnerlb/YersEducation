@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Linq;
-using Yers.DTO;
+using Yers.DTO.IdName;
 using Yers.IService;
 using Yers.Service.Entities;
 

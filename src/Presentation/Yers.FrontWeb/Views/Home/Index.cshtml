@@ -1,4 +1,4 @@
-﻿@using Yers.DTO
+﻿@using Yers.DTO.IdName
 @{
     Layout = null;
 }
@@ -44,11 +44,15 @@
             border-bottom: 3px solid #ff6a00;
             padding-bottom: 4px;
         }
+
+        [v-cloak] {
+            display: none;
+        }
     </style>
 </head>
 
 <body ontouchstart>
-    <div class="weui-tab" id="app">
+    <div class="weui-tab" id="app" v-cloak>
         <input type="hidden" value="@ViewBag.Type" id="courseTypeId" />
         <div class="weui-tab__bd" style="padding-bottom:50px;">
             <div class="weui-tab__bd-item weui-tab__bd-item--active">
@@ -121,7 +125,6 @@
                                         </div>
                                     </div>
                                 </a>
-
                             </div>
                             <div class="weui-panel__ft" id="loadMore">
                                 <a href="javascript:void(0);" @@click="loadMore()" class="weui-cell weui-cell_access weui-cell_link">
@@ -132,7 +135,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -156,8 +158,6 @@
                 <p class="weui-tabbar__label">我的</p>
             </a>
         </div>
-
-
     </div>
 
     <script src="~/Content/lib/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
@@ -169,13 +169,11 @@
     <script src="~/Scripts/axios.min.js"></script>
     @*<script src="http://vjs.zencdn.net/5.19/lang/zh-CN.js"></script>*@
     <script>
-
         var vm = new Vue({
             el: "#app",
             data() {
                 return {
                     total: 0,
-                    loading: true,
                     listQuery: {
                         page: 1,
                         limit: 10,
@@ -239,7 +237,5 @@
             });
         });
     </script>
-
 </body>
-
 </html>

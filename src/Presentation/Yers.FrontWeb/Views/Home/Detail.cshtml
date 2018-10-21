@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model  Yers.DTO.VideoAddDto
+@model  Yers.DTO.Video.VideoAddDto
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +23,11 @@
         }
 
         .vjs-big-play-button {
-            left: 0px;
-            top: 0px;
+            font-size: 3em;
+            line-height: 1.5em;
+            height: 1.5em;
+            width: 1.5em;
+            border-radius: 1em;
         }
 
         .my-pagination .swiper-pagination-bullet {
@@ -106,9 +109,6 @@
             <div class="swiper-container" id="detail-swiper">
                 <div class="my-pagination"><ul class="my-pagination-ul"></ul></div>
                 <div class="swiper-wrapper" style="background-color:white">
-                    <div class="swiper-slide swiper-detail" id="xiangqing">
-                        @Html.Raw(Model.VideoContent)
-                    </div>
                     <div class="swiper-slide swiper-detail" id="mulu">
                         <div class="weui-cells__title">课程目录</div>
                         <div class="weui-cells">
@@ -130,6 +130,9 @@
                                 </a>
                             }
                         </div>
+                    </div>
+                    <div class="swiper-slide swiper-detail" id="xiangqing">
+                        @Html.Raw(Model.VideoContent)
                     </div>
                     <div class="swiper-slide swiper-detail" id="taolun">
                         <h3>此功能暂未开放</h3>
@@ -184,19 +187,20 @@
 
             },
             mounted() {
-
+            },
+            beforeCreate() {
+                
             }
         });
-
         $(function () {
-            var mySwiper = new Swiper('.swiper-container', {
-                initialSlide :1,
+            new Swiper('.swiper-container', {
+                initialSlide: 0,
                 pagination: '.my-pagination-ul',
                 paginationClickable: true,
                 paginationBulletRender: function (index, className) {
                     switch (index) {
-                        case 0: name = '详情'; break;
-                        case 1: name = '目录'; break;
+                        case 0: name = '目录'; break;
+                        case 1: name = '详情'; break;
                         case 2: name = '讨论'; break;
                         default: name = '';
                     }

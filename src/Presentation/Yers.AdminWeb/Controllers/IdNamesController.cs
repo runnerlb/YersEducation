@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Yers.DTO;
+using Yers.DTO.IdName;
 using Yers.FrameworkWeb;
 using Yers.IService;
 

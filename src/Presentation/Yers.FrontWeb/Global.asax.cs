@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using System.Web.Routing;
 using Yers.FrameworkWeb;
 using Yers.IService;
 using Yers.Service;
+using Yers.Service.Migrations;
 
 namespace Yers.FrontWeb
 {
@@ -51,6 +53,8 @@ namespace Yers.FrontWeb
             EntityMapping.Initialize();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<YersDbContext, Configuration>());
         }
     }
 }

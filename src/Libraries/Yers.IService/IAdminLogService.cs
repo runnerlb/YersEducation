@@ -1,5 +1,5 @@
 ﻿using System;
-using Yers.DTO;
+using Yers.DTO.AdminLog;
 
 namespace Yers.IService
 {

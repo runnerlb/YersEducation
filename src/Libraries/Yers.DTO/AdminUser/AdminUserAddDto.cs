@@ -1,6 +1,6 @@
-﻿namespace Yers.DTO
+﻿namespace Yers.DTO.AdminUser
 {
-    public class AdminUserDto : BaseDto
+    public class AdminUserAddDto : BaseDto
     {
         /// <summary>
         /// 登录名

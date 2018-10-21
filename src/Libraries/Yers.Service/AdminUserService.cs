@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using Yers.Common;
-using Yers.DTO;
+using Yers.DTO.AdminUser;
 using Yers.IService;
 using Yers.Service.Entities;
 

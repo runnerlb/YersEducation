@@ -10,11 +10,11 @@ namespace Yers.Service.ModelConfig
             ToTable("T_Users");
 
             Property(m => m.UserName).IsRequired().HasMaxLength(50);
-            Property(m => m.HeadPortraitSrc).IsRequired().HasMaxLength(100);
+            Property(m => m.HeadPortraitSrc).IsRequired().HasMaxLength(1000);
             Property(m => m.AccountNumber).IsRequired().HasMaxLength(50).IsUnicode(false);
-            Property(m => m.RealName).IsRequired().HasMaxLength(20);
-            Property(m => m.PhoneNumber).IsRequired().HasMaxLength(20).IsUnicode(false);
-            Property(m => m.PaymentPassword).IsRequired().HasMaxLength(50);
+            Property(m => m.RealName).HasMaxLength(20);
+            Property(m => m.PhoneNumber).HasMaxLength(20).IsUnicode(false);
+            Property(m => m.PaymentPassword).HasMaxLength(50);
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Yers.DTO;
+using Yers.DTO.Video;
 using Yers.IService;
 using Yers.Service.Entities;
 
@@ -48,7 +48,7 @@ namespace Yers.Service
             {
                 BaseService<VideoEntity> videoBaseService = new BaseService<VideoEntity>(ctx);
                 var videoDto = videoBaseService.GetAll()
-                    .Where(a=>!a.IsDeleted).ToList();
+                    .Where(a => !a.IsDeleted).ToList();
 
                 return videoDto.Select(h => h.EntityMapToList()).ToArray();
             }
@@ -60,7 +60,7 @@ namespace Yers.Service
             {
                 BaseService<VideoEntity> videoBaseService = new BaseService<VideoEntity>(ctx);
                 var videoDto = videoBaseService.GetAll()
-                    .Where(a => a.Title.Contains(title)  && !a.IsDeleted);
+                    .Where(a => a.Title.Contains(title) && !a.IsDeleted);
 
                 total = videoDto.Count();
 

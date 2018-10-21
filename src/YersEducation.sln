@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yers.FrontWeb", "Presentati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yers.FrameworkWeb", "Presentation\Yers.FrameworkWeb\Yers.FrameworkWeb.csproj", "{12CC713E-7B02-4AD7-9632-02F86C6BE7CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yers.WxApi", "Libraries\Yers.WxApi\Yers.WxApi.csproj", "{5C391EC4-7932-4F17-AE61-AB3B537C9CA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{12CC713E-7B02-4AD7-9632-02F86C6BE7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12CC713E-7B02-4AD7-9632-02F86C6BE7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12CC713E-7B02-4AD7-9632-02F86C6BE7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C391EC4-7932-4F17-AE61-AB3B537C9CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C391EC4-7932-4F17-AE61-AB3B537C9CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C391EC4-7932-4F17-AE61-AB3B537C9CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C391EC4-7932-4F17-AE61-AB3B537C9CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{BA503906-87CA-4B16-8769-FD730AE1DAAB} = {3017EC0E-48A4-41AD-9866-728D4B8A0C24}
 		{736E61A0-675A-48FB-A13D-F3B896959CB7} = {3017EC0E-48A4-41AD-9866-728D4B8A0C24}
 		{12CC713E-7B02-4AD7-9632-02F86C6BE7CC} = {3017EC0E-48A4-41AD-9866-728D4B8A0C24}
+		{5C391EC4-7932-4F17-AE61-AB3B537C9CA4} = {9FC7291B-5125-4223-8616-2CD54AD35D8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EBB0FEA3-A476-43B2-8847-9A98B0B5BE45}

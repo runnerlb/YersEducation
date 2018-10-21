@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@model Yers.DTO.User.UserDto
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,6 @@
     <title>优尔思校长在线</title>
     <link rel="stylesheet" type="text/css" href="~/Content/lib/weui.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/jquery-weui.min.css" />
-    @*<link rel="stylesheet" type="text/css" href="~/Content/style.css">*@
     <link rel="stylesheet" type="text/css" href="~/Content/lib/video-js.css">
     <style>
         body, html {
@@ -66,8 +66,8 @@
             <header id='my-header' style="background-color:#234">
                 <div class="weui-flex">
                     <div class="weui-flex__item" style="padding:20px;">
-                        <img src="/Content/img/headimg.jpg" class="img">
-                        <div class="nickName">追逐我的明天</div>
+                        <img src="@Model.HeadPortraitSrc" class="img">
+                        <div class="nickName">@Model.UserName</div>
                         <div class="desc">把知识装进口袋，让学习变得简单</div>
                         <div class="huiyuan">+加入会员</div>
                     </div>

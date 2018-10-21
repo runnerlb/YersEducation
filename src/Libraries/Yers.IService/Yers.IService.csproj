@@ -45,6 +45,7 @@
     <Compile Include="IAdminLogService.cs" />
     <Compile Include="IServiceSupport.cs" />
     <Compile Include="ISettingService.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="IVideoDetailService.cs" />
     <Compile Include="IVideoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

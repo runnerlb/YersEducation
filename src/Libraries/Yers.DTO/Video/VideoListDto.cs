@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Yers.DTO
+namespace Yers.DTO.Video
 {
-    public class VideoAddDto : BaseDto
+    public class VideoListDto: BaseDto
     {
         /// <summary>
         /// 视频封面图片
@@ -21,24 +20,9 @@ namespace Yers.DTO
         public string LecturerName { get; set; }
 
         /// <summary>
-        /// 视频摘要
-        /// </summary>
-        public string Summary { get; set; }
-
-        /// <summary>
         /// 讲师头像
         /// </summary>
         public string LecturerHead { get; set; }
-
-        /// <summary>
-        /// 讲师职位
-        /// </summary>
-        public string LecturerPosition { get; set; }
-
-        /// <summary>
-        /// 原始价格
-        /// </summary>
-        public decimal OriginalPrice { get; set; }
 
         /// <summary>
         /// 优惠价格
@@ -46,35 +30,40 @@ namespace Yers.DTO
         public decimal PreferentialPrice { get; set; }
 
         /// <summary>
+        /// 视频摘要
+        /// </summary>
+        public string Summary { get; set; }
+
+        /// <summary>
         /// 视频内容
         /// </summary>
         public string VideoContent { get; set; }
-
         /// <summary>
         /// 上线时间
         /// </summary>
-        public DateTime OnlineTime { get; set; }
-
-        /// <summary>
-        /// 上传人Id
-        /// </summary>
-        public long AdminUserId { get; set; }
-
+        public string OnlineTime { get; set; }
         /// <summary>
         /// 课程类型Id
         /// </summary>
         public long CourseTypeId { get; set; }
+        /// <summary>
+        /// 课程类型
+        /// </summary>
+        public string CourseTypeName { get; set; }
 
         /// <summary>
         /// 视频类型Id
         /// </summary>
         public long VideoTypeId { get; set; }
+        /// <summary>
+        /// 视频类型
+        /// </summary>
+        public string VideoTypeName { get; set; }
 
         /// <summary>
         /// 视频数量
         /// </summary>
         public int TotalVideos { get; set; }
 
-        public List<VideoDetailListDto> VideoDetailListDtos { get; set; } = new List<VideoDetailListDto>();
     }
 }

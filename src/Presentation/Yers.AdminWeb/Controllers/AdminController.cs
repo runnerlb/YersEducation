@@ -1,7 +1,5 @@
-﻿using log4net;
-using System;
-using System.Web.Mvc;
-using Yers.DTO;
+﻿using System.Web.Mvc;
+using Yers.DTO.AdminUser;
 using Yers.FrameworkWeb;
 using Yers.IService;
 
@@ -11,6 +9,7 @@ namespace Yers.AdminWeb.Controllers
     {
         public IAdminUserService AdminUserService { get; set; }
         public IAdminLogService AdminLogService { get; set; }
+
         // GET: Admin
         public ActionResult Index()
         {

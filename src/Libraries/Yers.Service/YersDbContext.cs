@@ -6,7 +6,7 @@ using Yers.Service.Entities;
 
 namespace Yers.Service
 {
-    internal class YersDbContext : DbContext
+    public class YersDbContext : DbContext
     {
         private static ILog log = LogManager.GetLogger(typeof(YersDbContext));
 

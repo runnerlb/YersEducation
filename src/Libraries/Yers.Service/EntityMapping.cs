@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
-using Yers.DTO;
+using Yers.DTO.AdminLog;
+using Yers.DTO.AdminUser;
+using Yers.DTO.IdName;
+using Yers.DTO.User;
+using Yers.DTO.Video;
+using Yers.DTO.VIdeoDetail;
 using Yers.Service.Entities;
 
 namespace Yers.Service
@@ -26,6 +31,9 @@ namespace Yers.Service
                 cfg.CreateMap<VideoDetailEntity, VideoDetailListDto>();
                 cfg.CreateMap<VideoDetailEntity, VideoDetailAddDto>();
                 cfg.CreateMap<VideoDetailAddDto, VideoDetailEntity>();
+                cfg.CreateMap<UserDto, UserEntity>();
+                cfg.CreateMap<UserEntity, UserDto>();
+                cfg.CreateMap<UserAddDto, UserEntity>();
                 //.ForMember(m => m.Video, n => n.Ignore())
                 //.ForMember(dest => dest.VideoTypeName, conf => conf.MapFrom(m=>m.VideoType.Name))
                 //.ForMember(dest => dest.CourseTypeName, conf => conf.MapFrom(m=>m.CourseType.Name));
@@ -66,10 +74,12 @@ namespace Yers.Service
         {
             return Mapper.Map<AdminLogEntity>(model);
         }
+
         public static VideoEntity EntityMap(this VideoAddDto model)
         {
             return Mapper.Map<VideoEntity>(model);
         }
+
         public static VideoAddDto EntityMap(this VideoEntity model)
         {
             return Mapper.Map<VideoAddDto>(model);
@@ -79,10 +89,12 @@ namespace Yers.Service
         {
             return Mapper.Map<VideoListDto>(model);
         }
+
         public static VideoDetailEntity EntityMap(this VideoDetailAddDto model)
         {
             return Mapper.Map<VideoDetailEntity>(model);
         }
+
         public static VideoDetailAddDto EntityMap(this VideoDetailEntity model)
         {
             return Mapper.Map<VideoDetailAddDto>(model);
@@ -91,6 +103,22 @@ namespace Yers.Service
         public static VideoDetailListDto EntityMapToList(this VideoDetailEntity model)
         {
             return Mapper.Map<VideoDetailListDto>(model);
+        }
+
+        public static UserDto EntityMap(this UserEntity model)
+        {
+            return Mapper.Map<UserDto>(model);
+        }
+
+        public static UserEntity EntityMap(this UserDto model)
+        {
+            return Mapper.Map<UserEntity>(model);
+        }
+
+
+        public static UserEntity EntityMap(this UserAddDto model)
+        {
+            return Mapper.Map<UserEntity>(model);
         }
     }
 }

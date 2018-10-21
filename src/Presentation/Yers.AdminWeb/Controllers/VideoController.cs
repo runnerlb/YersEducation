@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using Yers.Common;
-using Yers.DTO;
+using Yers.DTO.IdName;
+using Yers.DTO.Video;
+using Yers.DTO.VIdeoDetail;
 using Yers.FrameworkWeb;
 using Yers.IService;
 
@@ -128,6 +130,7 @@ namespace Yers.AdminWeb.Controllers
         }
 
         #region 分片上传文件
+
         [HttpPost]
         public ActionResult Upload()
         {
@@ -146,6 +149,7 @@ namespace Yers.AdminWeb.Controllers
             //}
             return Json(new { erron = 0 });//Demo，随便返回了个值，请勿参考
         }
+
         public ActionResult Merge()
         {
             var guid = Request["guid"];//GUID
@@ -167,6 +171,7 @@ namespace Yers.AdminWeb.Controllers
             System.IO.Directory.Delete(dir);//删除文件夹
             return Json(new AjaxResult { Data = fileName, Msg = "上传成功", Result = true });//随便返回个值，实际中根据需要返回
         }
-        #endregion
+
+        #endregion 分片上传文件
     }
 }

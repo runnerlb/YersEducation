@@ -1,4 +1,4 @@
-﻿using Yers.DTO;
+﻿using Yers.DTO.AdminUser;
 
 namespace Yers.IService
 {

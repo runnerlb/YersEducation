@@ -1,4 +1,4 @@
-﻿namespace Yers.DTO
+﻿namespace Yers.DTO.AdminLog
 {
     public class AdminLogDto : BaseDto
     {

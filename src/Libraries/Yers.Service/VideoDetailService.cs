@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Yers.DTO;
+using Yers.DTO.VIdeoDetail;
 using Yers.IService;
 using Yers.Service.Entities;
 

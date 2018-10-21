@@ -163,7 +163,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SkipCheckLoginAttribute.cs" />
+    <Compile Include="App_Start\YersAuthorizeFilter.cs" />
     <Compile Include="App_Start\YersExceptionFilter.cs" />
+    <Compile Include="Controllers\AuthorizeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -259,7 +262,6 @@
     <Content Include="Content\upload\pro3.jpg" />
     <Content Include="Content\upload\pro4.jpg" />
     <Content Include="Content\upload\pro5.jpg" />
-    <Content Include="Content\upload\shipin.mp4" />
     <Content Include="Content\upload\xq1.jpg" />
     <Content Include="Content\upload\xq2.jpg" />
     <Content Include="Content\upload\xq3.jpg" />
@@ -290,7 +292,9 @@
     <Content Include="Scripts\swiper.js" />
     <Content Include="Scripts\swiper.min.js" />
     <Content Include="Scripts\vue.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -315,6 +319,7 @@
     <Content Include="Views\Home\My.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Authorize\Index.cshtml" />
     <None Include="Views\Home\Shop.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -333,6 +338,10 @@
     <ProjectReference Include="..\..\Libraries\Yers.Service\Yers.Service.csproj">
       <Project>{5e67683c-c413-4e08-a08f-0062be53829d}</Project>
       <Name>Yers.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Yers.WxApi\Yers.WxApi.csproj">
+      <Project>{5c391ec4-7932-4f17-ae61-ab3b537c9ca4}</Project>
+      <Name>Yers.WxApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\Yers.FrameworkWeb\Yers.FrameworkWeb.csproj">
       <Project>{12cc713e-7b02-4ad7-9632-02f86c6be7cc}</Project>

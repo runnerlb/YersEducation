@@ -61,6 +61,15 @@
     <Compile Include="AdminLogService.cs" />
     <Compile Include="AdminUserService.cs" />
     <Compile Include="BaseService.cs" />
+    <Compile Include="Migrations\201810182309277_UserAdd.cs" />
+    <Compile Include="Migrations\201810182309277_UserAdd.Designer.cs">
+      <DependentUpon>201810182309277_UserAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810190001505_UserAdd02.cs" />
+    <Compile Include="Migrations\201810190001505_UserAdd02.Designer.cs">
+      <DependentUpon>201810190001505_UserAdd02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserService.cs" />
     <Compile Include="Entities\AdminLogEntity.cs" />
     <Compile Include="Entities\AdminUserEntity.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
@@ -148,6 +157,10 @@
       <Project>{697B00A5-3AC8-49D9-B8B8-531DA4F569D7}</Project>
       <Name>Yers.IService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Yers.WxApi\Yers.WxApi.csproj">
+      <Project>{5C391EC4-7932-4F17-AE61-AB3B537C9CA4}</Project>
+      <Name>Yers.WxApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -177,6 +190,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809271634476_Video-Add-TotalVideo.resx">
       <DependentUpon>201809271634476_Video-Add-TotalVideo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810182309277_UserAdd.resx">
+      <DependentUpon>201810182309277_UserAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810190001505_UserAdd02.resx">
+      <DependentUpon>201810190001505_UserAdd02.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

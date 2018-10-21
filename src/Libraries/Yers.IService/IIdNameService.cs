@@ -1,4 +1,4 @@
-﻿using Yers.DTO;
+﻿using Yers.DTO.IdName;
 
 namespace Yers.IService
 {
@@ -15,7 +15,9 @@ namespace Yers.IService
         IdNameDto GetById(long id);
 
         IdNameDto[] GetPagedData(string name, string typeName, out int total, int page = 1, int limit = 10);
+
         IdNameDto[] GetByTypeName(string typeName);
+
         void UpdateImage(int id, string fileName);
     }
 }

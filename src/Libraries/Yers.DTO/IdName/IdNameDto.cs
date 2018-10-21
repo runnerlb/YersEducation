@@ -1,6 +1,6 @@
-﻿namespace Yers.DTO
+﻿namespace Yers.DTO.IdName
 {
-    public class IdNameDto:BaseDto
+    public class IdNameDto : BaseDto
     {
         public string TypeName { get; set; }
         public string Name { get; set; }

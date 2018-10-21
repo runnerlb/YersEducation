@@ -1,4 +1,4 @@
-﻿namespace Yers.DTO
+﻿namespace Yers.DTO.VIdeoDetail
 {
     /// <summary>
     /// 视频详情

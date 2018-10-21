@@ -2,7 +2,7 @@ namespace Yers.Service.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Yers.Service.YersDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<Yers.Service.YersDbContext>
     {
         public Configuration()
         {

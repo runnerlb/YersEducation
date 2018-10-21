@@ -23,6 +23,11 @@ namespace Yers.Service.Entities
         public string AccountNumber { get; set; }
 
         /// <summary>
+        /// 微信地址
+        /// </summary>
+        public string WxAddress { get; set; }
+
+        /// <summary>
         /// 真实姓名
         /// </summary>
         public string RealName { get; set; }
@@ -35,7 +40,7 @@ namespace Yers.Service.Entities
         /// <summary>
         /// 会员等级
         /// </summary>
-        public int UserLevel { get; set; }
+        public int? UserLevel { get; set; }
 
         /// <summary>
         /// 性别
@@ -45,7 +50,7 @@ namespace Yers.Service.Entities
         /// <summary>
         /// 地区地址
         /// </summary>
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
 
         /// <summary>
         /// 注册时间
@@ -65,6 +70,6 @@ namespace Yers.Service.Entities
         /// <summary>
         /// 推荐人Id
         /// </summary>
-        public int ReferrerId { get; set; }
+        public int? ReferrerId { get; set; }
     }
 }
